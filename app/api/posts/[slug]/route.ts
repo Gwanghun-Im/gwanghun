@@ -2,7 +2,7 @@ import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 
-export async function GET(req, { params }) {
+export async function GET(req: any, { params }: { params: any }) {
   const { slug } = params
 
   // Markdown 파일 경로
@@ -19,7 +19,8 @@ export async function GET(req, { params }) {
       status: 200,
       headers: { "Content-Type": "application/json" },
     })
-  } catch (error) {
+  } catch (err) {
+    console.error(err)
     return new Response(JSON.stringify({ error: "Markdown file not found" }), {
       status: 404,
     })
