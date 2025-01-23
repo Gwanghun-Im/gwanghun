@@ -10,6 +10,11 @@
       "StackName": "amplify-gwanghun-dev-9b0f0",
       "StackId": "arn:aws:cloudformation:ap-northeast-2:476176929224:stack/amplify-gwanghun-dev-9b0f0/338d5780-d965-11ef-8a63-06dc1ec5379f",
       "AmplifyAppId": "d2bcatm0boi1u"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      }
     }
   }
 }
