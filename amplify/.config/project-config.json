@@ -6,10 +6,10 @@
   "javascript": {
     "framework": "react",
     "config": {
-      "SourceDir": "src",
-      "DistributionDir": "build",
-      "BuildCommand": "npm run-script build",
-      "StartCommand": "npm run-script start"
+      "SourceDir": "./",
+      "DistributionDir": "out",
+      "BuildCommand": "npm run build && npx next export",
+      "StartCommand": "npm run start"
     }
   },
   "providers": [

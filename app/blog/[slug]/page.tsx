@@ -1,44 +1,28 @@
-"use client"
-
-import { use, useEffect, useState } from "react"
+import fs from "fs"
+import path from "path"
+import matter from "gray-matter"
 import ReactMarkdown from "react-markdown"
+import { use } from "react"
+import { PageProps } from "@/.next/types/app/blog/[slug]/page"
 
-export default function BlogPost({
-  params,
-}: {
-  params: Promise<{ slug: string }>
-}) {
-  const resolvedParams = use(params) // Promise를 언랩
-  const { slug } = resolvedParams
-  const [post, setPost] = useState<null | { frontMatter: any; content: any }>(
-    null
-  )
-  const [loading, setLoading] = useState(true)
+export function generateStaticParams() {
+  const contentDir = path.join(process.cwd(), "markdown") // 'markdown' 디렉토리 지정
+  const filenames = fs.readdirSync(contentDir)
 
-  useEffect(() => {
-    async function fetchPost() {
-      try {
-        const response = await fetch(`/api/posts/${slug}`)
-        if (!response.ok) throw new Error("Failed to fetch the post")
+  return filenames.map((filename) => ({
+    slug: filename.replace(/\.md$/, ""),
+  })) as { slug: string }[] // 강제 타입 지정
+}
 
-        const data = await response.json()
-        setPost(data)
-      } catch (error) {
-        console.error("Error fetching post:", error)
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchPost()
-  }, [slug])
-
-  if (loading) return <div>Loading...</div>
-  if (!post) return <div>Post not found.</div>
+export default async function BlogPost({ params }: PageProps) {
+  const { slug } = await params
+  const filePath = path.join(process.cwd(), "markdown", `${slug}.md`) // 'markdown' 경로 설정
+  const fileContent = fs.readFileSync(filePath, "utf-8")
+  const { content } = matter(fileContent)
 
   return (
     <div>
-      <ReactMarkdown>{post.content}</ReactMarkdown>
+      <ReactMarkdown>{content}</ReactMarkdown>
     </div>
   )
 }
