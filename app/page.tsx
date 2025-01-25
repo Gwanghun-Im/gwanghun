@@ -2,21 +2,26 @@
 
 import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Main() {
   const [markdown, setMarkdown] = useState("")
+  const router = useRouter()
 
   useEffect(() => {
-    setMarkdown(`# hi`)
+    setMarkdown(`# hi there`)
   }, [])
+
+  const move = () => {
+    router.push("/blog/intro")
+  }
 
   if (!markdown) return <div>Loading...</div>
 
   return (
-    <div style={{ width: "100%", display: "flex", justifyContent: "center" }}>
-      <div style={{ maxWidth: "768px", width: "100%" }}>
-        <ReactMarkdown>{markdown}</ReactMarkdown>
-      </div>
-    </div>
+    <>
+      <ReactMarkdown>{markdown}</ReactMarkdown>
+      <img onClick={move} src="/pet.webp" alt="" />
+    </>
   )
 }
