@@ -7,12 +7,7 @@ export default function Main() {
   const [markdown, setMarkdown] = useState("")
 
   useEffect(() => {
-    async function fetchPost() {
-      const response = await fetch(`/api/posts/intro`)
-      const data = await response.json()
-      setMarkdown(data.content)
-    }
-    fetchPost()
+    setMarkdown(`# hi`)
   }, [])
 
   if (!markdown) return <div>Loading...</div>
