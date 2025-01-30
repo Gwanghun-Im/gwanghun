@@ -3,7 +3,7 @@ import path from "path"
 import matter from "gray-matter"
 import ReactMarkdown from "react-markdown"
 import { use } from "react"
-import { PageProps } from "@/.next/types/app/blog/[slug]/page"
+import { PageProps } from "@/.next/types/app/page"
 
 export function generateStaticParams() {
   const contentDir = path.join(process.cwd(), "markdown") // 'markdown' 디렉토리 지정
