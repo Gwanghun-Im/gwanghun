@@ -59,7 +59,7 @@ export function calculateDeposit(
   depositType: string
 ) {
   let beforeTax = 0
-  let result = []
+  const result = []
 
   period = parseInt(String(period))
   money = parseInt(String(money))
