@@ -20,5 +20,5 @@ export default function RootLayout({
 }
 
 const Headers = () => {
-  return <div style={{ height: "200px" }}></div>
+  return <div style={{ height: "100px" }}></div>
 }

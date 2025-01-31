@@ -3,6 +3,7 @@
 import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { Button } from "@mui/material"
 
 const MARK_DOWN_PAGE = "md"
 
@@ -24,6 +25,7 @@ export default function Main() {
     <>
       <ReactMarkdown>{markdown}</ReactMarkdown>
       <img onClick={move} src="/pet.webp" alt="" />
+      <Button onClick={() => router.push(`/calc`)}>예금계산기</Button>
     </>
   )
 }

@@ -1,18 +1,21 @@
-import { TextField, TextFieldProps } from "@mui/material"
+import { useFormikContext } from "formik"
+import { InputAdornment, TextField, TextFieldProps } from "@mui/material"
 
 interface InputProps extends Omit<TextFieldProps, "name"> {
   label: string
   name: string
-  formik: any
+  unit: string
 }
 
 export const Input = ({
   label,
   name,
-  formik,
+  inputMode,
+  unit,
   type = "text",
   ...props
 }: InputProps) => {
+  const formik = useFormikContext()
   return (
     <TextField
       label={label}
@@ -25,6 +28,10 @@ export const Input = ({
       size="small"
       autoComplete="off"
       type={type}
+      InputProps={{
+        endAdornment: <InputAdornment position="end">{unit}</InputAdornment>,
+        inputMode: inputMode,
+      }}
       {...props} // 나머지 MUI 속성 전달
     />
   )
