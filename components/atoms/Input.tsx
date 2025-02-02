@@ -32,6 +32,9 @@ export const Input = ({
         endAdornment: <InputAdornment position="end">{unit}</InputAdornment>,
         inputMode: inputMode,
       }}
+      inputProps={{
+        inputMode,
+      }}
       {...props} // 나머지 MUI 속성 전달
     />
   )
