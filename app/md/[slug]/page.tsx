@@ -12,7 +12,7 @@ import remarkParse from "remark-parse"
 import stringify from "rehype-stringify"
 import rehypePrism from "rehype-prism-plus"
 import { Box } from "@mui/material"
-import { PageProps } from "@/.next/types/app/md/[slug]/page"
+import { PageProps } from "@/.next/types/app/page"
 
 export function generateStaticParams() {
   const contentDir = path.join(process.cwd(), "markdown") // 'markdown' 디렉토리 지정

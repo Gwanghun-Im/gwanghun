@@ -1,4 +1,6 @@
+import CustomAppBar from "@/components/organisms/AppBar"
 import "./globals.css"
+import { Box, CssBaseline } from "@mui/material"
 
 export default function RootLayout({
   children,
@@ -8,17 +10,21 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Headers />
-        <div
-          style={{ width: "100%", display: "flex", justifyContent: "center" }}
+        <CssBaseline />
+        <CustomAppBar />
+        <Box
+          component="main"
+          sx={{
+            marginTop: "64px",
+            p: 3,
+            width: "100%",
+            display: "flex",
+            justifyContent: "center",
+          }}
         >
-          <div style={{ maxWidth: "768px", width: "100%" }}>{children}</div>
-        </div>
+          <Box sx={{ maxWidth: "768px", width: "100%" }}>{children}</Box>
+        </Box>
       </body>
     </html>
   )
-}
-
-const Headers = () => {
-  return <div style={{ height: "100px" }}></div>
 }
