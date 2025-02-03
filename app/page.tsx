@@ -4,6 +4,8 @@ import ReactMarkdown from "react-markdown"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@mui/material"
+import { MarkdownTemplate } from "@/components/templates/MarkdownTemplate"
+import Link from "next/link"
 
 const MARK_DOWN_PAGE = "md"
 
@@ -12,7 +14,8 @@ export default function Main() {
   const router = useRouter()
 
   useEffect(() => {
-    setMarkdown(`# hi there`)
+    const introduce = `# hi there`
+    setMarkdown(introduce)
   }, [])
 
   const move = () => {
@@ -25,7 +28,10 @@ export default function Main() {
     <>
       <ReactMarkdown>{markdown}</ReactMarkdown>
       <img onClick={move} src="/pet.webp" alt="" />
-      <Button onClick={() => router.push(`/calc`)}>예금계산기</Button>
+      <Button>
+        <Link href={"/calc"}>예금계산기</Link>
+      </Button>
+      <MarkdownTemplate />
     </>
   )
 }
