@@ -32,10 +32,11 @@ export default async function BlogPost({ params }: PageProps) {
   return (
     <Box className="mark-down">
       <ReactMarkdown
-        children={content}
         remarkPlugins={[breaks, remarkGfm, remarkSlug, remarkParse]}
         rehypePlugins={[remark2rehype, rehypePrism, katex, stringify, raw]}
-      />
+      >
+        {content}
+      </ReactMarkdown>
     </Box>
   )
 }
