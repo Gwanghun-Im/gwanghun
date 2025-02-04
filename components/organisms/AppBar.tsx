@@ -28,6 +28,7 @@ const navItems = [
   { name: "Home", link: "/" },
   { name: "Blog", link: "/md" },
   { name: "About", link: "/md/intro" },
+  { name: "MyTools", link: "/tools" },
   { name: "Contact", link: "/" },
 ]
 const CustomAppBar = (props: Props) => {

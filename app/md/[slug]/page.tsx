@@ -12,7 +12,6 @@ import remarkParse from "remark-parse"
 import stringify from "rehype-stringify"
 import rehypePrism from "rehype-prism-plus"
 import { Box } from "@mui/material"
-import { PageProps } from "@/.next/types/app/page"
 
 export function generateStaticParams() {
   const contentDir = path.join(process.cwd(), "markdown") // 'markdown' 디렉토리 지정
@@ -23,7 +22,7 @@ export function generateStaticParams() {
   })) as { slug: string }[] // 강제 타입 지정
 }
 
-export default async function BlogPost({ params }: PageProps) {
+export default async function BlogPost({ params }) {
   const { slug } = await params
   const filePath = path.join(process.cwd(), "markdown", `${slug}.md`) // 'markdown' 경로 설정
   const fileContent = fs.readFileSync(filePath, "utf-8")
