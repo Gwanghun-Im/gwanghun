@@ -4,8 +4,8 @@
 import { useState } from "react"
 import { useFormik, FormikProvider } from "formik"
 import * as yup from "yup"
-import { calculateDeposit } from "../utils"
-import { DepositTemplate } from "@/components/templates/DepositTemplate"
+import { calculateMonthlyInstallment } from "@/app/utils"
+import { SavingTemplate } from "@/components/templates/SavingTemplate"
 
 export type DepositResult = {
   title: string
@@ -19,10 +19,9 @@ const INITIAL_VALUES = {
   period: 0,
   money: 0,
   rate: 0,
-  depositType: "1",
 }
 
-export type FormValues = typeof INITIAL_VALUES
+export type SavingFormValues = typeof INITIAL_VALUES
 
 const VALIDATION_SCHEMA = yup.object({
   period: yup.number().required(),
@@ -37,11 +36,10 @@ const Page = () => {
     initialValues: INITIAL_VALUES,
     validationSchema: VALIDATION_SCHEMA,
     onSubmit: (value) => {
-      const res = calculateDeposit(
+      const res = calculateMonthlyInstallment(
         value.period,
         value.money,
-        value.rate,
-        value.depositType
+        value.rate
       )
       setRows(res)
     },
@@ -49,7 +47,7 @@ const Page = () => {
 
   return (
     <FormikProvider value={formik}>
-      <DepositTemplate rows={rows} />
+      <SavingTemplate rows={rows} />
     </FormikProvider>
   )
 }

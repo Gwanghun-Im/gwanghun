@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation"
 import { Button } from "@mui/material"
 import { MarkdownTemplate } from "@/components/templates/MarkdownTemplate"
 import Link from "next/link"
+import { ToolsTemplate } from "@/components/templates/ToolsTemplate"
 
 const MARK_DOWN_PAGE = "md"
 
@@ -28,9 +29,7 @@ export default function Main() {
     <>
       <ReactMarkdown>{markdown}</ReactMarkdown>
       <img onClick={move} src="/pet.webp" alt="" />
-      <Button>
-        <Link href={"/calc"}>예금계산기</Link>
-      </Button>
+      <ToolsTemplate />
       <MarkdownTemplate />
     </>
   )

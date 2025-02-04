@@ -28,6 +28,7 @@ const navItems = [
   { name: "Home", link: "/" },
   { name: "Blog", link: "/md" },
   { name: "About", link: "/md/intro" },
+  { name: "MyTools", link: "/tools" },
   { name: "Contact", link: "/" },
 ]
 const CustomAppBar = (props: Props) => {
@@ -79,7 +80,7 @@ const CustomAppBar = (props: Props) => {
             component="div"
             sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
           >
-            gwanghun.im
+            <Link href={"/"}>gwanghun.im</Link>
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
