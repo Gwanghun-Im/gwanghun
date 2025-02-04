@@ -3,7 +3,6 @@ import { Input } from "../atoms/Input"
 import { DepositFormControl } from "../molecules/DepositFormControl"
 import { Button } from "@mui/material"
 import { useFormikContext } from "formik"
-
 const DepositCard = () => {
   const formik = useFormikContext()
   return (

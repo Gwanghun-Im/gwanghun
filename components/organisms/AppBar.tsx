@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography"
 import Button from "@mui/material/Button"
 import { IconButton } from "@mui/material"
 import { useState } from "react"
+import Link from "next/link"
 
 interface Props {
   /**
@@ -23,7 +24,12 @@ interface Props {
 }
 
 const drawerWidth = 240
-const navItems = ["Home", "About", "Contact"]
+const navItems = [
+  { name: "Home", link: "/" },
+  { name: "Blog", link: "/md" },
+  { name: "About", link: "/md/intro" },
+  { name: "Contact", link: "/" },
+]
 const CustomAppBar = (props: Props) => {
   const { window } = props
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -40,24 +46,27 @@ const CustomAppBar = (props: Props) => {
       <Divider />
       <List>
         {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
+          <ListItem key={item.name} disablePadding>
             <ListItemButton sx={{ textAlign: "center" }}>
-              <ListItemText primary={item} />
+              <Link href={item.link}>
+                <ListItemText primary={item.name} />
+              </Link>
             </ListItemButton>
           </ListItem>
         ))}
       </List>
     </Box>
   )
+
   const container =
     window !== undefined ? () => window().document.body : undefined
 
   return (
     <>
-      <AppBar component="nav" enableColorOnDark>
+      <AppBar component="nav">
         <Toolbar>
           <IconButton
-            color="success"
+            color="inherit"
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
@@ -74,8 +83,8 @@ const CustomAppBar = (props: Props) => {
           </Typography>
           <Box sx={{ display: { xs: "none", sm: "block" } }}>
             {navItems.map((item) => (
-              <Button key={item} sx={{ color: "#fff" }}>
-                {item}
+              <Button key={item.name} sx={{ color: "#fff" }}>
+                <Link href={item.link}>{item.name}</Link>
               </Button>
             ))}
           </Box>

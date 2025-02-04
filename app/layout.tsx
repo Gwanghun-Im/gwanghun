@@ -10,7 +10,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <CssBaseline />
         <CustomAppBar />
         <Box
           component="main"
