@@ -1,6 +1,7 @@
 import { Box } from "@mui/material"
 import { DepositTable } from "../organisms/DepositTable"
 import DepositCard from "../organisms/DepositCard"
+import DepositSliderCard from "../organisms/DepositSliderCard"
 
 export const DepositTemplate = ({ rows }) => (
   <Box
@@ -11,6 +12,7 @@ export const DepositTemplate = ({ rows }) => (
     }}
   >
     <DepositCard />
+    <DepositSliderCard />
     {rows.length ? <DepositTable rows={rows} /> : null}
   </Box>
 )
