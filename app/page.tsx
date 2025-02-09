@@ -7,6 +7,8 @@ import { Button } from "@mui/material"
 import { MarkdownTemplate } from "@/components/templates/MarkdownTemplate"
 import Link from "next/link"
 import { ToolsTemplate } from "@/components/templates/ToolsTemplate"
+import ChatRoom from "@/components/organisms/ChatRoom"
+import ChatRoomTemplate from "@/components/templates/ChatRoomTemplate"
 
 const MARK_DOWN_PAGE = "md"
 
@@ -31,6 +33,7 @@ export default function Main() {
       <img onClick={move} src="/pet.webp" alt="" />
       <ToolsTemplate />
       <MarkdownTemplate />
+      <ChatRoomTemplate />
     </>
   )
 }

@@ -16,9 +16,9 @@ export type DepositResult = {
 }
 
 const INITIAL_VALUES = {
-  period: 0,
-  money: 0,
-  rate: 0,
+  period: 12,
+  money: 100,
+  rate: 3.5,
   depositType: "1",
 }
 
