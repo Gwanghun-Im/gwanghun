@@ -15,7 +15,7 @@ export async function GET(req) {
       )
     }
 
-    let params = {
+    const params = {
       TableName: "gwanghun_dynamo_db",
       KeyConditionExpression: "roomId = :roomId",
       ExpressionAttributeValues: {

@@ -2,9 +2,9 @@ import { useFormikContext } from "formik"
 import { InputAdornment, TextField, TextFieldProps } from "@mui/material"
 
 interface InputProps extends Omit<TextFieldProps, "name"> {
-  label: string
-  name: string
-  unit: string
+  label?: string
+  name?: string
+  unit?: string
 }
 
 export const Input = ({

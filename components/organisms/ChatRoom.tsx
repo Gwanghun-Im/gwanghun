@@ -1,5 +1,16 @@
 "use client"
 import { useEffect, useState } from "react"
+import {
+  Container,
+  Paper,
+  List,
+  ListItem,
+  ListItemText,
+  TextField,
+  Button,
+  Typography,
+  Box,
+} from "@mui/material"
 
 type ChatMessage = {
   action: "sendmessage" // ✅ API Gateway에서 설정한 routeKey와 동일해야 함
@@ -15,10 +26,10 @@ type WebSocketResponse = {
   timestamp: number
 }
 
-export default function ChatRoom({ roomId }) {
+export default function ChatRoom({ roomId }: { roomId: string }) {
   const [messages, setMessages] = useState([])
   const [message, setMessage] = useState("")
-  const [socket, setSocket] = useState(null)
+  const [socket, setSocket] = useState<WebSocket | null>(null)
   const [lastKey, setLastKey] = useState(null)
   const [loading, setLoading] = useState(false)
 
@@ -35,9 +46,12 @@ export default function ChatRoom({ roomId }) {
     setLastKey(data.lastKey)
     setLoading(false)
   }
+
   useEffect(() => {
     // 메세지 가져오기
-    fetchMessages()
+    if (!messages.length) {
+      fetchMessages()
+    }
 
     // 🟢 WebSocket 연결 설정
     const ws = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL)
@@ -47,8 +61,14 @@ export default function ChatRoom({ roomId }) {
       console.log("✅ WebSocket Messages")
 
       try {
-        const data: WebSocketResponse = JSON.parse(event.data)
-        setMessages((prev) => [data, ...prev]) // 최신 메시지를 추가
+        if (event.data) {
+          const data: WebSocketResponse = JSON.parse(event.data)
+          setMessages((prev) =>
+            prev.some((msg) => msg.timestamp === data.timestamp)
+              ? prev
+              : [data, ...prev]
+          )
+        }
       } catch (error) {
         console.error("🚨 메시지 파싱 오류:", error)
       }
@@ -61,6 +81,7 @@ export default function ChatRoom({ roomId }) {
 
   const sendMessage = () => {
     if (socket && message.trim()) {
+      console.log("🛜 Send Messages")
       const payload: ChatMessage = {
         action: "sendmessage",
         roomId,
@@ -75,30 +96,64 @@ export default function ChatRoom({ roomId }) {
   }
 
   return (
-    <div>
-      <button onClick={fetchMessages} disabled={loading}>
-        {loading ? "Loading..." : "Load More"}
-      </button>
-      <ul>
-        {messages.map((msg) => (
-          <li key={msg.timestamp}>
-            <strong>{msg.sender}: </strong> {msg.message}
-          </li>
-        ))}
-      </ul>
-      {/* <div>
-        {messages.map((msg, idx) => (
-          <div key={idx}>
-            <strong>{msg.sender}:</strong> {msg.message}
-          </div>
-        ))}
-      </div> */}
-      <input
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        placeholder="메시지를 입력하세요"
-      />
-      <button onClick={sendMessage}>전송</button>
-    </div>
+    <Container>
+      <Paper
+        sx={{ height: "80vh", display: "flex", flexDirection: "column", p: 2 }}
+      >
+        {/* 채팅방 헤더 */}
+        <Typography variant="h6" textAlign="center" sx={{ mb: 2 }}>
+          {roomId} 채팅방
+        </Typography>
+
+        {/* 채팅 메시지 리스트 */}
+        <List sx={{ flexGrow: 1, overflowY: "auto", mb: 2 }}>
+          {messages.map((msg, idx) => (
+            <ListItem
+              key={idx}
+              sx={{
+                display: "flex",
+                justifyContent:
+                  msg.sender === "user1" ? "flex-end" : "flex-start",
+              }}
+            >
+              <Paper
+                sx={{
+                  p: 1,
+                  bgcolor:
+                    msg.sender === "user1" ? "primary.light" : "grey.300",
+                }}
+              >
+                <>
+                  <ListItemText
+                    primary={
+                      <Typography variant="body1">{msg.message}</Typography>
+                    }
+                    secondary={
+                      <Typography variant="caption">{msg.sender}</Typography>
+                    }
+                  />
+                </>
+              </Paper>
+            </ListItem>
+          ))}
+        </List>
+
+        {/* 입력 필드 및 전송 버튼 */}
+        <Box sx={{ display: "flex", gap: 1 }}>
+          <TextField
+            fullWidth
+            variant="outlined"
+            size="small"
+            placeholder="메시지를 입력하세요..."
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+            onKeyDown={(e) => e.key === "Enter" && sendMessage()}
+          />
+          <Button variant="contained" color="primary" onClick={sendMessage}>
+            전송
+          </Button>
+        </Box>
+      </Paper>
+    </Container>
   )
 }
