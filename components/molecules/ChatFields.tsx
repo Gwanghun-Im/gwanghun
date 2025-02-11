@@ -1,8 +1,10 @@
+import { useWebSocket } from "@/hooks/useWebSocket"
 import useChatMessageStore from "@/store/useChatMessageStore"
 import { Box, Button, TextField } from "@mui/material"
 
-export default function ChatFields({ sendMessage }) {
-  const { message, setMessage, messages, setMessages } = useChatMessageStore()
+export default function ChatFields() {
+  const { message, setMessage } = useChatMessageStore()
+  const { sendMessage } = useWebSocket()
   return (
     <Box sx={{ display: "flex", gap: 1 }}>
       <TextField

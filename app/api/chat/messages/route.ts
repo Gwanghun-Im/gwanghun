@@ -35,7 +35,7 @@ export async function GET(req) {
 
     const data = await dynamoDb.query(params).promise()
 
-    return NextResponse.json({ success: true, messages: data.Items })
+    return NextResponse.json({ success: true, messages: data.Items.reverse() })
   } catch (error) {
     console.error("DynamoDB Error:", error)
     return NextResponse.json(

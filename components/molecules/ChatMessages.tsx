@@ -1,27 +1,30 @@
 "use client"
 import useChatMessageStore from "@/store/useChatMessageStore"
+import useRoomStore from "@/store/useRoomStore"
 import { List, ListItem, ListItemText, Paper, Typography } from "@mui/material"
-import { useEffect, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
-export default function ChatMessages({ roomId }) {
+export default function ChatMessages() {
   const { messages, setMessages } = useChatMessageStore()
   const [lastKey, setLastKey] = useState(null)
+  const { roomId } = useRoomStore()
 
   const fetchMessages = async () => {
     let url = `/api/chat/messages?roomId=${roomId}&limit=10`
     if (lastKey) url += `&lastKey=${encodeURIComponent(lastKey)}`
     const res = await fetch(url)
     const data = await res.json()
-    console.log(data)
+    console.log("InitMessages::", data)
     setMessages(data.messages)
     setLastKey(data.lastKey)
   }
 
   useEffect(() => {
+    if (!roomId) return
     if (!messages.length) {
       fetchMessages()
     }
-  }, [])
+  }, [roomId])
 
   return (
     <List sx={{ flexGrow: 1, overflowY: "auto", mb: 2 }}>
