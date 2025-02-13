@@ -478,3 +478,15 @@ iframe {
     display: none;
   }
 }
+
+/*  */
+.p-box {
+  color: #56b6c2;
+  cursor: pointer;
+  display: inline;
+  font-style: italic;
+  &:hover {
+    color: #56b6c250;
+  }
+  transition: 500ms;
+}
