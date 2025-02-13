@@ -7,7 +7,14 @@ export type ChatMessageType = {
   setMessages: (data: MessageResponse[]) => void
 }
 
-export type RoomType = {
-  roomId: string
-  setRoomId: (data: string) => void
+export type RoomType<T> = {
+  roomId: T
+  setRoomId: (data: T) => void
+}
+
+export type UserType = {
+  connectionId: string
+  userName: string
+  setConnectionId: (text: string) => void
+  setUserName: (text) => void
 }

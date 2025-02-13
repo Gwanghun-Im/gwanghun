@@ -1,9 +1,10 @@
 "use client"
 import dayjs from "dayjs"
 import ChatRoom from "../organisms/ChatRoom"
-import { Box } from "@mui/material"
+import { Box, Typography } from "@mui/material"
 import useRoomStore from "@/store/useRoomStore"
 import { useEffect } from "react"
+import Link from "next/link"
 
 const ChatRoomTemplate = () => {
   const { setRoomId } = useRoomStore()
@@ -15,6 +16,9 @@ const ChatRoomTemplate = () => {
 
   return (
     <>
+      <Typography variant="h5" gutterBottom>
+        <Link href={"/chat"}>Chat</Link>
+      </Typography>
       <Box sx={{ margin: 5 }}></Box>
       <ChatRoom />
     </>

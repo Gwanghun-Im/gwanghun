@@ -4,7 +4,7 @@ import { ChatMessageType } from "./types"
 // 1. Zustand 스토어 생성
 const useChatMessageStore = create<ChatMessageType>((set) => ({
   message: "",
-  setMessage: (text) => set({ message: text }),
+  setMessage: (text: string) => set({ message: text }),
   messages: [],
   setMessages: (data) =>
     set((state) => ({

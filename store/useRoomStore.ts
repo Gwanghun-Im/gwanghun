@@ -1,9 +1,9 @@
 import { create } from "zustand"
 import { RoomType } from "./types"
 
-const useRoomStore = create<RoomType>((set) => ({
+const useRoomStore = create<RoomType<string>>((set) => ({
   roomId: "",
-  setRoomId: (text) =>
+  setRoomId: (text: string) =>
     set({
       roomId: text,
     }),
