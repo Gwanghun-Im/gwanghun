@@ -5,6 +5,9 @@ import React, {
   useCallback,
   useState,
   useEffect,
+  FC,
+  ReactNode,
+  Fragment,
 } from "react"
 import { useToast } from "@/components/atoms/toast/use-toast"
 import { cn } from "@/lib/utils"
@@ -50,8 +53,8 @@ const DictionaryContext = createContext<{
 })
 
 // Dictionary Provider Component
-export const DictionaryProvider: React.FC<{
-  children: React.ReactNode
+export const DictionaryProvider: FC<{
+  children: ReactNode
   initial?: Record<string, KeywordDefinition>
 }> = ({ children, initial = {} }) => {
   const [dictionary, setDictionary] = useState(initial)
@@ -100,8 +103,8 @@ export const useDictionary = () => {
 }
 
 // Main DetectPop component
-export const DetectPop: React.FC<{
-  children: React.ReactNode
+export const DetectPop: FC<{
+  children: ReactNode
   config?: DetectPopConfig
   className?: string
 }> = ({ children, config = {}, className }) => {
@@ -212,11 +215,11 @@ export const DetectPop: React.FC<{
   return (
     <div className={className}>
       {processedText.map((segment, index) => (
-        <React.Fragment key={index}>
+        <Fragment key={index}>
           {segment.type === "keyword"
             ? renderKeyword(segment.content)
             : segment.content}
-        </React.Fragment>
+        </Fragment>
       ))}
     </div>
   )

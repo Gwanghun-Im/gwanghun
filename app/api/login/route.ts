@@ -1,25 +1,26 @@
 import { NextResponse } from "next/server"
-import useUserStore from "@/store/useUserStore"
+import { cookies } from "next/headers"
 
 // 메시지 조회 API (GET)
 export async function GET(req) {
-  const { userName, setUserName } = useUserStore()
   try {
     const { searchParams } = new URL(req.url)
     const name = searchParams.get("userName")
 
-    if (userName) {
+    if (!name) {
       return NextResponse.json(
-        { error: "로그인 된 고객입니다." },
+        { error: "사용자 이름이 필요합니다." },
         { status: 400 }
       )
     }
-    setUserName(name)
 
-    return NextResponse.json({ success: true })
+    return NextResponse.json({
+      success: true,
+      userName: name,
+    })
   } catch (error) {
     return NextResponse.json(
-      { error: "고객을 불러올 수 없습니다." },
+      { error: "처리 중 오류가 발생했습니다." },
       { status: 500 }
     )
   }
