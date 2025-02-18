@@ -11,6 +11,7 @@ import {
   Paper,
   Typography,
 } from "@mui/material"
+import dayjs from "dayjs"
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 export default function ChatMessages() {
@@ -44,26 +45,28 @@ export default function ChatMessages() {
   }, [messages, main])
 
   return (
-    <List sx={{ flexGrow: 1, overflowY: "auto", mb: 2 }}>
+    <List sx={{ overflowY: "auto", mb: 2 }}>
       {messages.map((msg, idx) => (
         <ListItem
           key={idx}
           sx={{
             display: "flex",
-            justifyContent: msg.sender === "user1" ? "flex-end" : "flex-start",
+            justifyContent: "flex-start",
           }}
         >
           <Paper
             sx={{
               p: 1,
-              bgcolor: msg.sender === "user1" ? "primary.light" : "grey.300",
+              bgcolor: "primary.light",
             }}
           >
             <>
               <ListItemText
                 primary={<Typography variant="body1">{msg.message}</Typography>}
                 secondary={
-                  <Typography variant="caption">{msg.sender}</Typography>
+                  <Typography variant="caption">
+                    {msg.sender} ({dayjs(msg.timestamp).format("HH:mm:ss")})
+                  </Typography>
                 }
               />
             </>

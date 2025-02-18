@@ -17,7 +17,7 @@ const ChatRoomTemplate = () => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        <Link href={"/chat"}>Chat</Link>
+        <Link href={"/chat"}>방명록(WebSocket)</Link>
       </Typography>
       <Box sx={{ margin: 5 }}></Box>
       <ChatRoom />
