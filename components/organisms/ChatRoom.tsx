@@ -22,7 +22,7 @@ export default function ChatRoom() {
         sx={{ height: "80vh", display: "flex", flexDirection: "column", p: 2 }}
       >
         {/* 채팅방 헤더 */}
-        <Typography variant="h6" textAlign="center" sx={{ mb: 2 }}>
+        <Typography variant="h5" textAlign="center" sx={{ mb: 2 }}>
           {roomId} 채팅방
         </Typography>
 

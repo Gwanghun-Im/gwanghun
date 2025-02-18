@@ -11,14 +11,14 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  useEffect(() => {
-    const handleKeyUp = (event: KeyboardEvent) => {
-      printDev("Key pressed:", event.key)
-    }
+  // useEffect(() => {
+  //   const handleKeyUp = (event: KeyboardEvent) => {
+  //     printDev("Key pressed:", event.key)
+  //   }
 
-    window.addEventListener("keyup", handleKeyUp)
-    return () => window.removeEventListener("keyup", handleKeyUp)
-  }, [])
+  //   window.addEventListener("keyup", handleKeyUp)
+  //   return () => window.removeEventListener("keyup", handleKeyUp)
+  // }, [])
   return (
     <html lang="en">
       <body>
