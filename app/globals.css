@@ -57,6 +57,13 @@ a {
   src: url("/fonts/Monaco.ttf") format("ttf");
 }
 
+@font-face {
+  font-family: "Moneygraphy-Rounded";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/Moneygraphy-Rounded.ttf") format("ttf");
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -489,4 +496,8 @@ iframe {
     color: #56b6c250;
   }
   transition: 500ms;
+}
+
+.MuiTypography-h6 {
+  font-family: "Moneygraphy-Rounded";
 }
