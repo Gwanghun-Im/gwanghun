@@ -8,6 +8,7 @@ import { ToolsTemplate } from "@/components/templates/ToolsTemplate"
 import ChatRoomTemplate from "@/components/templates/ChatRoomTemplate"
 import useUserStore from "@/store/useUserStore"
 import api from "@/lib/axios"
+import Image from "next/image"
 
 const MARK_DOWN_PAGE = "md"
 
@@ -46,7 +47,14 @@ export default function Main() {
   return (
     <>
       <ReactMarkdown>{markdown}</ReactMarkdown>
-      <img onClick={move} src="/pet.webp" alt="" />
+      <Image
+        onClick={move}
+        src="/pet.webp"
+        alt=""
+        width={1000}
+        height={1000}
+        className="w-full h-auto"
+      />
       <ToolsTemplate />
       <MarkdownTemplate />
       <ChatRoomTemplate />

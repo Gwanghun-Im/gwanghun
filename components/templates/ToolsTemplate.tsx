@@ -7,6 +7,7 @@ import Button from "../atoms/Button"
 const rows = [
   { title: "💸 예금계산기", link: "/calc/deposit" },
   { title: "💸 적금계산기", link: "/calc/saving" },
+  { title: "🟡 키워드 팝업", link: "/detect-pop" },
 ]
 export const ToolsTemplate = () => {
   return (
