@@ -11,11 +11,18 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^6.4.4",
     "@mui/material": "^6.4.2",
+    "@radix-ui/react-toast": "^1.1.5",
+    "@radix-ui/react-tooltip": "^1.0.7",
     "aws-sdk": "^2.1692.0",
+    "axios": "^1.7.9",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.0",
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.475.0",
     "marked": "^15.0.6",
     "next": "^15.1.6",
     "react": "^19.0.0",
@@ -36,15 +43,21 @@
     "remark-rehype": "^11.1.1",
     "remark-slug": "^5.1.2",
     "sanitize-html": "^2.14.0",
-    "yup": "^1.6.1"
+    "tailwind-merge": "^2.2.0",
+    "yup": "^1.6.1",
+    "zustand": "^5.0.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "autoprefixer": "^10.4.17",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
+    "postcss": "^8.4.35",
+    "tailwindcss": "^3.4.1",
+    "tailwindcss-animate": "^1.0.7",
     "typescript": "^5"
   }
 }

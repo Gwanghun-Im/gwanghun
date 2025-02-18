@@ -4,7 +4,7 @@
 import { useState } from "react"
 import { useFormik, FormikProvider } from "formik"
 import * as yup from "yup"
-import { calculateMonthlyInstallment } from "@/app/utils"
+import { calculateMonthlyInstallment } from "@/utils"
 import { SavingTemplate } from "@/components/templates/SavingTemplate"
 
 export type DepositResult = {

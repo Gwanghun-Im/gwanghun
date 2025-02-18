@@ -14,6 +14,9 @@ import Button from "@mui/material/Button"
 import { IconButton } from "@mui/material"
 import { useState } from "react"
 import Link from "next/link"
+import LoginDialog from "./LoginDialog"
+import useUserStore from "@/store/useUserStore"
+import { AccountCircle } from "@mui/icons-material"
 
 interface Props {
   /**
@@ -35,6 +38,8 @@ const navItems = [
 const CustomAppBar = (props: Props) => {
   const { window } = props
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [loginOpen, setLoginOpen] = useState(false)
+  const { userName } = useUserStore()
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState)
@@ -89,6 +94,15 @@ const CustomAppBar = (props: Props) => {
                 <Link href={item.link}>{item.name}</Link>
               </Button>
             ))}
+            {userName ? (
+              <Button sx={{ color: "#fff" }} startIcon={<AccountCircle />}>
+                {userName}
+              </Button>
+            ) : (
+              <Button sx={{ color: "#fff" }} onClick={() => setLoginOpen(true)}>
+                로그인
+              </Button>
+            )}
           </Box>
         </Toolbar>
       </AppBar>
@@ -112,6 +126,7 @@ const CustomAppBar = (props: Props) => {
           {drawer}
         </Drawer>
       </nav>
+      <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   )
 }

@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -19,7 +23,7 @@ body {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: "Monaco";
+  font-family: "Moneygraphy-Rounded";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -55,6 +59,22 @@ a {
   font-weight: 400;
   font-style: normal;
   src: url("/fonts/Monaco.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "Moneygraphy-Rounded";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/Moneygraphy-Rounded.ttf") format("ttf");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Monaco";
 }
 
 img {
@@ -477,4 +497,16 @@ iframe {
   .katex-mathml {
     display: none;
   }
+}
+
+/*  */
+.p-box {
+  color: #56b6c2;
+  cursor: pointer;
+  display: inline;
+  font-style: italic;
+  &:hover {
+    color: #56b6c250;
+  }
+  transition: 500ms;
 }
