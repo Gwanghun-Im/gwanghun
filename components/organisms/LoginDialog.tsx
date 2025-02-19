@@ -15,13 +15,15 @@ import {
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined"
 import useUserStore from "@/store/useUserStore"
 import api from "@/lib/axios"
+import useLoginDialogStore from "@/store/useLoginDialogStore"
 
 interface LoginDialogProps {
   open: boolean
   onClose: () => void
 }
 
-const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
+const LoginDialog = () => {
+  const { isOpen, setIsOpen } = useLoginDialogStore()
   const [userName, setUserName] = useState("")
   const { setUserName: setStoreUserName } = useUserStore()
 
@@ -33,7 +35,7 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
 
       if (response.data.success) {
         setStoreUserName(response.data.userName)
-        onClose()
+        setIsOpen(false)
       }
     } catch (error) {
       console.error("로그인 중 오류 발생:", error)
@@ -41,7 +43,7 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
   }
 
   return (
-    <Dialog open={open} onClose={onClose}>
+    <Dialog open={isOpen} onClose={() => setIsOpen(false)}>
       <Box
         sx={{
           display: "flex",
@@ -70,7 +72,7 @@ const LoginDialog = ({ open, onClose }: LoginDialogProps) => {
           </Box>
         </DialogContent>
         <DialogActions sx={{ px: 3, pb: 3, pt: 1 }}>
-          <Button onClick={onClose} color="primary">
+          <Button onClick={() => setIsOpen(false)} color="primary">
             취소
           </Button>
           <Button

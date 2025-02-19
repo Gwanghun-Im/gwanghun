@@ -21,6 +21,7 @@
     "clsx": "^2.1.0",
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
+    "framer-motion": "^12.4.4",
     "gray-matter": "^4.0.3",
     "lucide-react": "^0.475.0",
     "marked": "^15.0.6",

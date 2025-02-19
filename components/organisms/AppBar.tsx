@@ -1,32 +1,10 @@
 "use client"
-import AppBar from "@mui/material/AppBar"
-import Box from "@mui/material/Box"
-import CssBaseline from "@mui/material/CssBaseline"
-import Divider from "@mui/material/Divider"
-import Drawer from "@mui/material/Drawer"
-import List from "@mui/material/List"
-import ListItem from "@mui/material/ListItem"
-import ListItemButton from "@mui/material/ListItemButton"
-import ListItemText from "@mui/material/ListItemText"
-import Toolbar from "@mui/material/Toolbar"
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
-import { IconButton } from "@mui/material"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
 import LoginDialog from "./LoginDialog"
 import useUserStore from "@/store/useUserStore"
-import { AccountCircle } from "@mui/icons-material"
+import useLoginDialogStore from "@/store/useLoginDialogStore"
 
-interface Props {
-  /**
-   * Injected by the documentation to work in an iframe.
-   * You won't need it on your project.
-   */
-  window?: () => Window
-}
-
-const drawerWidth = 240
 const navItems = [
   { name: "Home", link: "/" },
   { name: "Chat", link: "/chat" },
@@ -35,100 +13,145 @@ const navItems = [
   { name: "MyTools", link: "/tools" },
   { name: "Contact", link: "/" },
 ]
-const CustomAppBar = (props: Props) => {
-  const { window } = props
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const [loginOpen, setLoginOpen] = useState(false)
-  const { userName } = useUserStore()
 
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState)
+export default function AppBar() {
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { userName, setUserName } = useUserStore()
+  const { setIsOpen, setOnLogin } = useLoginDialogStore()
+
+  const handleLogin = (name: string) => {
+    setUserName(name)
   }
 
-  const drawer = (
-    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        gwanghun.im
-      </Typography>
-      <Divider />
-      <List>
-        {navItems.map((item) => (
-          <ListItem key={item.name} disablePadding>
-            <ListItemButton sx={{ textAlign: "center" }}>
-              <Link href={item.link}>
-                <ListItemText primary={item.name} />
-              </Link>
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  )
+  useEffect(() => {
+    setOnLogin(handleLogin)
+  }, [])
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined
+  const handleLogout = () => {
+    setUserName(null)
+  }
 
   return (
-    <>
-      <AppBar component="nav">
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: "none" } }}
-          >
-            메뉴
-          </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-          >
-            <Link href={"/"}>gwanghun.im</Link>
-          </Typography>
-          <Box sx={{ display: { xs: "none", sm: "block" } }}>
+    <nav className="bg-blue-600 text-white fixed top-0 z-50 w-full">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between h-16">
+          {/* 모바일 메뉴 버튼 */}
+          <div className="flex items-center sm:hidden">
+            <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="text-white p-2"
+            >
+              메뉴
+            </button>
+          </div>
+
+          {/* 로고 */}
+          <div className="flex-shrink-0 flex items-center">
+            <Link href="/" className="text-xl font-bold">
+              gwanghun.im
+            </Link>
+          </div>
+
+          {/* 데스크톱 네비게이션 */}
+          <div className="hidden sm:flex sm:items-center">
             {navItems.map((item) => (
-              <Button key={item.name} sx={{ color: "#fff" }}>
-                <Link href={item.link}>{item.name}</Link>
-              </Button>
+              <Link
+                key={item.name}
+                href={item.link}
+                className="px-3 py-2 text-white hover:text-gray-200"
+              >
+                {item.name}
+              </Link>
             ))}
             {userName ? (
-              <Button sx={{ color: "#fff" }} startIcon={<AccountCircle />}>
-                {userName}
-              </Button>
+              <div className="flex items-center ml-4">
+                <span className="mr-2">{userName}</span>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md hover:bg-gray-100"
+                >
+                  로그아웃
+                </button>
+              </div>
             ) : (
-              <Button sx={{ color: "#fff" }} onClick={() => setLoginOpen(true)}>
+              <button
+                onClick={() => setIsOpen(true)}
+                className="ml-4 px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md hover:bg-gray-100"
+              >
                 로그인
-              </Button>
+              </button>
             )}
-          </Box>
-        </Toolbar>
-      </AppBar>
-      <nav>
-        <Drawer
-          container={container}
-          variant="temporary"
-          open={mobileOpen}
-          onClose={handleDrawerToggle}
-          ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
-          }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-        >
-          {drawer}
-        </Drawer>
-      </nav>
-      <LoginDialog open={loginOpen} onClose={() => setLoginOpen(false)} />
-    </>
+          </div>
+        </div>
+      </div>
+
+      {/* 백그라운드 오버레이 */}
+      {mobileOpen && (
+        <div
+          className={`fixed inset-0 bg-black transition-opacity duration-300 z-40 ${
+            mobileOpen ? "opacity-50" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
+
+      {/* 모바일 메뉴 - 왼쪽에서 슬라이드 */}
+      <div
+        className={`fixed top-0 left-0 h-full w-64 bg-blue-600 shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        }`}
+      >
+        {/* 메뉴 내용 */}
+        <div className="p-4">
+          <div className="flex justify-between items-center mb-6">
+            <span className="text-xl font-bold">Menu</span>
+            <button
+              onClick={() => setMobileOpen(false)}
+              className="text-white p-2"
+            >
+              닫기
+            </button>
+          </div>
+          <div className="space-y-3">
+            {navItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.link}
+                className="block py-2 text-white hover:text-gray-200"
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            {userName ? (
+              <div className="pt-4">
+                <span className="block mb-2 text-white">{userName}</span>
+                <button
+                  onClick={() => {
+                    handleLogout()
+                    setMobileOpen(false)
+                  }}
+                  className="w-full px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md hover:bg-gray-100"
+                >
+                  로그아웃
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => {
+                  setIsOpen(true)
+                  setMobileOpen(false)
+                }}
+                className="w-full px-4 py-2 text-sm font-medium text-blue-600 bg-white rounded-md hover:bg-gray-100"
+              >
+                로그인
+              </button>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <LoginDialog />
+    </nav>
   )
 }
-
-export default CustomAppBar
