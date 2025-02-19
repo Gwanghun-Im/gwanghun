@@ -1,26 +1,28 @@
 import { useWebSocket } from "@/hooks/useWebSocket"
 import useChatMessageStore from "@/store/useChatMessageStore"
 import useUserStore from "@/store/useUserStore"
-import { inputStyles } from "@/styles/atoms/input"
-import { buttonStyles } from "@/styles/atoms/button"
-import { chatFieldsStyles } from "@/styles/molecules/chatFields"
-import clsx from "clsx"
+import useLoginDialogStore from "@/store/useLoginDialogStore"
 
 export default function ChatFields() {
   const { message, setMessage } = useChatMessageStore()
   const { userName } = useUserStore()
   const { sendMessage } = useWebSocket()
-
+  const { setIsOpen } = useLoginDialogStore()
   if (!userName) {
     return (
-      <div>
-        <h2 className="text-xl font-semibold">로그인을 수행해주세요!</h2>
+      <div className="flex gap-2 pt-2 border-t border-gray-200 mt-auto justify-center">
+        <button
+          className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+          onClick={() => setIsOpen(true)}
+        >
+          로그인을 수행해주세요!
+        </button>
       </div>
     )
   }
 
   return (
-    <div className="flex gap-2 p-4 border-t border-gray-200">
+    <div className="flex gap-2 p-4 border-t border-gray-200 mt-auto">
       <input
         className="flex-1 px-4 py-2 border text-white border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
         type="text"

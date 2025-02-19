@@ -27,7 +27,7 @@ export default function Page() {
       <DetectPop
         config={{
           toastPosition: "bottom",
-          toastDuration: 5000,
+          toastDuration: 1_000,
         }}
       >
         react와 hooks를 사용하면 정말 멋진 앱을 만들 수 있습니다.

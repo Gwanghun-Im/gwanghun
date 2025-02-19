@@ -26,10 +26,10 @@ export default function RootLayout({
         <Box
           component="main"
           sx={{
-            marginTop: "64px",
             p: 3,
             width: "100%",
             display: "flex",
+            paddingTop: "70px",
             justifyContent: "center",
           }}
         >
