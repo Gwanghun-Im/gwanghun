@@ -30,7 +30,7 @@ export default function ChatMessages() {
     if (!messages.length) {
       fetchMessages()
     }
-  }, [roomId, messages.length, fetchMessages])
+  }, [roomId])
 
   useEffect(() => {
     if (!main) {
