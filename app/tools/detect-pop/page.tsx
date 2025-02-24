@@ -1,37 +1,55 @@
 "use client"
-import { DictionaryProvider } from "@/contexts/dictionary/DictionaryContext"
-import { DetectPop } from "@/components/molecules/DetectPop"
 
+import { useEffect, useState } from "react"
+import {
+  DetectPop,
+  DictionaryProvider,
+  useDictionary,
+  Toaster,
+} from "react-detect-popup"
+
+// DictionaryProvider 내부에서 사용할 컴포넌트를 분리
+function Content() {
+  const [text, setText] = useState(
+    "react는 매우 강력한 도구입니다., vue는 매우 강력한 도구입니다."
+  )
+  const { dictionary, addKeyword } = useDictionary()
+
+  useEffect(() => {
+    console.log(dictionary)
+    addKeyword("vue", {
+      description: "프론트엔드 라이브러리",
+      examples: ["React Hooks", "Components"],
+    })
+    console.log(dictionary)
+  }, [addKeyword])
+
+  return (
+    <>
+      <DetectPop>{text}</DetectPop>
+      <Toaster />
+    </>
+  )
+}
+
+// 메인 페이지 컴포넌트
 export default function Page() {
   return (
     <DictionaryProvider
       initial={{
         react: {
-          description: "쩐다~!",
-          examples: ["리액트 훅스", "컴포넌트"],
+          description: "프론트엔드 라이브러리",
+          examples: ["React Hooks", "Components"],
           style: {
-            backgroundColor: "bg-indigo-100",
-            textColor: "text-indigo-900",
-          },
-        },
-        hooks: {
-          description: "리액트의 강력한 기능",
-          examples: ["useState", "useEffect"],
-          style: {
-            backgroundColor: "bg-green-100",
-            textColor: "text-green-900",
+            backgroundColor: "red",
+            textColor: "white",
+            borderRadius: "10px",
+            padding: "10px",
           },
         },
       }}
     >
-      <DetectPop
-        config={{
-          toastPosition: "bottom",
-          toastDuration: 1_000,
-        }}
-      >
-        react와 hooks를 사용하면 정말 멋진 앱을 만들 수 있습니다.
-      </DetectPop>
+      <Content />
     </DictionaryProvider>
   )
 }
