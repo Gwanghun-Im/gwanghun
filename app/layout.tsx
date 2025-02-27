@@ -4,7 +4,7 @@ import "./globals.css"
 import { Box, CssBaseline } from "@mui/material"
 import { printDev } from "@/utils/system"
 import { useEffect } from "react"
-
+import { Toaster } from "react-detect-popup"
 export default function RootLayout({
   children,
 }: {
@@ -34,6 +34,7 @@ export default function RootLayout({
         >
           <Box sx={{ maxWidth: "768px", width: "100%" }}>{children}</Box>
         </Box>
+        <Toaster />
       </body>
     </html>
   )
