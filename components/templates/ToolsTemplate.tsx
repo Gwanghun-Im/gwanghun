@@ -4,6 +4,7 @@ const rows = [
   { title: "💸 예금계산기", link: "/calc/deposit" },
   { title: "💸 적금계산기", link: "/calc/saving" },
   { title: "🟡 키워드 팝업", link: "/detect-pop" },
+  { title: "⚾️ kbo logos", link: "/react-kbo-logos" },
 ]
 
 export const ToolsTemplate = () => {
