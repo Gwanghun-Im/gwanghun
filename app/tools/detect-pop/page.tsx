@@ -5,6 +5,7 @@ import {
   DetectPop,
   DictionaryProvider,
   useDictionary,
+  defaultStyle,
 } from "react-detect-popup"
 import Link from "next/link"
 
@@ -16,20 +17,13 @@ function Content() {
   const { dictionary, addKeyword, removeKeyword } = useDictionary()
 
   useEffect(() => {
-    console.log(dictionary)
-    addKeyword("reactNative", {
-      description: "모바일 라이브러리",
-      examples: ["React", "Components"],
-      style: {
-        backgroundColor: "red-100",
-        textColor: "blue-900",
-        borderRadius: "sm",
-        padding: "1",
-      },
-    })
     const addTest = async () => {
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      removeKeyword("react")
+      await new Promise((resolve) => setTimeout(resolve, 0))
+      addKeyword("vue", {
+        description: "프론트엔드 라이브러리",
+        examples: ["React Hooks", "Components"],
+      })
+      await new Promise((resolve) => setTimeout(resolve, 0))
       addKeyword("reactNative", {
         description: "모바일 라이브러리",
         examples: ["React", "Components"],
@@ -40,34 +34,17 @@ function Content() {
           padding: "1",
         },
       })
-      await new Promise((resolve) => setTimeout(resolve, 1000))
-      addKeyword("vue", {
-        description: "프론트엔드 라이브러리",
-        examples: ["React Hooks", "Components"],
-      })
-      addKeyword("react", {
-        description: "프론트엔드 라이브러리",
-        examples: ["React Hooks", "Components"],
-      })
     }
     addTest()
   }, [addKeyword])
 
-  useEffect(() => {
-    console.log(dictionary)
-    const keywords = Object.keys(dictionary).sort((a, b) => b.length - a.length)
-    // 가장 먼저 나타나는 키워드 찾기
-    for (const keyword of keywords) {
-      const index = text.toLowerCase().indexOf(keyword.toLowerCase())
-      if (index !== -1 && index < text.length) {
-        console.log(keyword)
-      }
-    }
-    // console.log(keywords)
-  }, [dictionary])
-
   return (
     <>
+      <textarea
+        className="w-full p-2 border border-gray-300 rounded-md mb-4"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
       <DetectPop
         config={{
           toastPosition: "top",
@@ -75,6 +52,34 @@ function Content() {
       >
         {text}
       </DetectPop>
+      <div className="fixed bottom-0 w-100 bg-black/50 z-50">
+        <h2 className="text-lg font-bold mb-2">👇키워드 목록</h2>
+        <div className="flex flex-wrap">
+          {Object.keys(dictionary).map((keyword) => (
+            <span
+              className={`cursor-pointer transition-colors 
+                hover:opacity-80 inline-block bg-${
+                  dictionary[keyword].style?.backgroundColor ??
+                  defaultStyle.backgroundColor
+                } 
+                text-${
+                  dictionary[keyword].style?.textColor ?? defaultStyle.textColor
+                }
+                rounded-${
+                  dictionary[keyword].style?.borderRadius ??
+                  defaultStyle.borderRadius
+                } 
+                px-${
+                  dictionary[keyword].style?.padding ?? defaultStyle.padding
+                } 
+                mr-2 mb-1`}
+              key={keyword}
+            >
+              {keyword}
+            </span>
+          ))}
+        </div>
+      </div>
     </>
   )
 }
@@ -90,7 +95,7 @@ export default function Page() {
             examples: ["React Hooks", "Components"],
             style: {
               backgroundColor: "red-100",
-              textColor: "red-100",
+              textColor: "red-900",
               borderRadius: "sm",
               padding: "1",
             },
@@ -99,11 +104,6 @@ export default function Page() {
       >
         <Content />
       </DictionaryProvider>
-      <Link href={"/md/intro_react_detect_popup"}>
-        <button className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 font-medium">
-          Example
-        </button>
-      </Link>
     </>
   )
 }
