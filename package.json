@@ -27,7 +27,7 @@
     "marked": "^15.0.6",
     "next": "^15.1.6",
     "react": "^19.0.0",
-    "react-detect-popup": "^1.1.1",
+    "react-detect-popup": ">=1.1.4",
     "react-dom": "^19.0.0",
     "react-kbo-logos": "^1.1.12",
     "react-markdown": "^9.0.3",
