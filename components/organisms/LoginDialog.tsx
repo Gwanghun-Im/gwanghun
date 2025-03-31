@@ -69,7 +69,7 @@ export default function LoginDialog() {
                     className="block w-full px-4 py-3 rounded-lg border border-gray-300 
                              focus:ring-2 focus:ring-blue-500 focus:border-transparent
                              transition-all duration-200 ease-in-out
-                             text-gray-900 placeholder-gray-400
+                             text-white placeholder-gray-400
                              shadow-sm"
                     placeholder="이름을 입력하세요"
                     autoFocus
