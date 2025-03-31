@@ -1,7 +1,4 @@
 import { Card, CardHeader, CardContent, CardActions } from "@mui/material"
-import { DepositFormControl } from "../molecules/DepositFormControl"
-import { Button } from "@mui/material"
-import { useFormikContext } from "formik"
 import { useRouter } from "next/navigation"
 import { BlogType } from "../templates/MarkdownTemplate"
 
