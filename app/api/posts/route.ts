@@ -7,12 +7,14 @@ export async function GET() {
     const postsDirectory = path.join(process.cwd(), "markdown")
     const fileNames = fs.readdirSync(postsDirectory)
 
-    const posts = fileNames.map((fileName) => {
-      return {
-        title: fileName.replace(/\.md$/, ""),
-        link: fileName.replace(/\.md$/, "").toLowerCase(),
-      }
-    })
+    const posts = fileNames
+      .filter((fileName) => !fileName.includes("how"))
+      .map((fileName) => {
+        return {
+          title: fileName.replace(/\.md$/, ""),
+          link: fileName.replace(/\.md$/, "").toLowerCase(),
+        }
+      })
 
     return NextResponse.json(posts)
   } catch (error) {
