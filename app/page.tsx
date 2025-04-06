@@ -5,11 +5,11 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { MarkdownTemplate } from "@/components/templates/MarkdownTemplate"
 import { ToolsTemplate } from "@/components/templates/ToolsTemplate"
+import { GreedFearIndexTemplate } from "@/components/templates/GreedFearIndexTemplate"
 import ChatRoomTemplate from "@/components/templates/ChatRoomTemplate"
 import useUserStore from "@/store/useUserStore"
 import api from "@/lib/axios"
 import Image from "next/image"
-
 const MARK_DOWN_PAGE = "md"
 
 export default function Main() {
@@ -46,15 +46,16 @@ export default function Main() {
 
   return (
     <>
-      <ReactMarkdown>{markdown}</ReactMarkdown>
-      <Image
+      <GreedFearIndexTemplate />
+      {/* <ReactMarkdown>{markdown}</ReactMarkdown> */}
+      {/* <Image
         onClick={move}
         src="/pet.webp"
         alt=""
         width={1000}
         height={1000}
         className="w-full h-auto"
-      />
+      /> */}
       <ToolsTemplate />
       <MarkdownTemplate />
       <ChatRoomTemplate />

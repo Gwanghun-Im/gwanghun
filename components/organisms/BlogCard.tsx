@@ -5,21 +5,16 @@ import { BlogType } from "../templates/MarkdownTemplate"
 const BlogCard = (blog: { blog: BlogType }) => {
   const router = useRouter()
   return (
-    <Card
+    <div
       onClick={() => {
         router.push("/md/" + blog.blog.link)
       }}
+      className="cursor-pointer hover:bg-gray-100 hover:text-black rounded-md"
     >
-      <CardContent
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          gap: 3,
-        }}
-      >
-        <CardHeader title={blog.blog.title} />
-      </CardContent>
-    </Card>
+      <div className="flex flex-col">
+        <h1 className="text-2xl font-bold">{blog.blog.title}</h1>
+      </div>
+    </div>
   )
 }
 
