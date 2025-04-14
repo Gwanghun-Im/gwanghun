@@ -2,12 +2,15 @@ import { useWebSocket } from "@/hooks/useWebSocket"
 import useChatMessageStore from "@/store/useChatMessageStore"
 import useUserStore from "@/store/useUserStore"
 import useLoginDialogStore from "@/store/useLoginDialogStore"
+import { useState } from "react"
 
 export default function ChatFields() {
   const { message, setMessage } = useChatMessageStore()
   const { userName } = useUserStore()
   const { sendMessage } = useWebSocket()
   const { setIsOpen } = useLoginDialogStore()
+  const [isComposing, setIsComposing] = useState(false)
+
   if (!userName) {
     return (
       <div className="flex gap-2 pt-2 border-t border-gray-200 mt-auto justify-center">
@@ -29,8 +32,10 @@ export default function ChatFields() {
         placeholder="메시지를 입력하세요..."
         value={message}
         onChange={(e) => setMessage(e.target.value)}
+        onCompositionStart={() => setIsComposing(true)}
+        onCompositionEnd={() => setIsComposing(false)}
         onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey) {
+          if (!isComposing && e.key === "Enter" && !e.shiftKey) {
             e.preventDefault()
             sendMessage()
           }
