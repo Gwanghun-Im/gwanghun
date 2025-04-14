@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link"
 import { use } from "react"
 
 const getFearGreedIndex = fetch("https://api.alternative.me/fng/")
@@ -17,7 +18,16 @@ export function FearGreedIndex() {
         (fearGreedIndex === "Fear" ? " bg-red-500" : " bg-green-500")
       }
     >
-      Check today&apos;s greed and fear index: {fearGreedIndex}
+      <span className="hidden md:inline">
+        Check today&apos;s greed and fear index:{" "}
+      </span>
+      <span className="md:hidden">today&apos;s gnf index: </span>
+      <Link
+        href="https://edition.cnn.com/markets/fear-and-greed"
+        className="text-white text-opacity-50"
+      >
+        {fearGreedIndex}
+      </Link>
     </div>
   )
 }
