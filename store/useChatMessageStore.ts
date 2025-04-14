@@ -8,7 +8,10 @@ const useChatMessageStore = create<ChatMessageType>((set) => ({
   messages: [],
   setMessages: (data) =>
     set((state) => ({
-      messages: [...state.messages, ...data],
+      messages:
+        typeof data === "function"
+          ? data(state.messages) // 함수형 업데이트
+          : data, // 직접 값 할당
     })),
 }))
 

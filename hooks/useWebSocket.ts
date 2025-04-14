@@ -30,7 +30,7 @@ export function useWebSocket() {
       try {
         if (event.data) {
           const data: MessageResponse = JSON.parse(event.data)
-          setMessages([data])
+          setMessages((prev: MessageResponse[]) => [...prev, data])
         }
       } catch (error) {
         console.error("🚨 메시지 파싱 오류:", error)
