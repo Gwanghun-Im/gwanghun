@@ -35,6 +35,9 @@ export default function RootLayout({
           <Box sx={{ maxWidth: "768px", width: "100%" }}>{children}</Box>
         </Box>
         <Toaster />
+        <div className="flex w-full h-2 p-3 sticky bottom-0 justify-center items-center">
+          Footer
+        </div>
       </body>
     </html>
   )

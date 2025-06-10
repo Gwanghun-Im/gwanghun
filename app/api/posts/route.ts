@@ -8,7 +8,9 @@ export async function GET() {
     const fileNames = fs.readdirSync(postsDirectory)
 
     const posts = fileNames
-      .filter((fileName) => !fileName.includes("how"))
+      .filter(
+        (fileName) => !fileName.includes("how") && fileName.includes(".md")
+      )
       .map((fileName) => {
         return {
           title: fileName.replace(/\.md$/, ""),
