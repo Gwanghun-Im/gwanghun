@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
+import { gzipSync } from "zlib"
 
 export async function GET() {
   try {
@@ -18,7 +19,16 @@ export async function GET() {
         }
       })
 
-    return NextResponse.json(posts)
+    const json = JSON.stringify(posts)
+    const gzipped = gzipSync(json)
+
+    return new Response(gzipped, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Encoding": "gzip",
+      },
+    })
   } catch (error) {
     console.error("파일 읽기 오류:", error)
     return NextResponse.json(
