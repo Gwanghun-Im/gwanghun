@@ -19,10 +19,10 @@ printDev(
 
 // AWS SDK 설정
 const dynamoDb = new AWS.DynamoDB.DocumentClient({
-  region: process.env.NEXT_PUBLIC_AWS_REGION,
+  region: process.env.NEXT_PUBLIC_AWS_REGION || "ap-northeast-2",
   credentials: {
-    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID || "",
+    secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY || "",
   },
 })
 

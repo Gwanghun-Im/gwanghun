@@ -16,5 +16,5 @@ export type UserType = {
   connectionId: string
   userName: string
   setConnectionId: (text: string) => void
-  setUserName: (text) => void
+  setUserName: (text: string) => void
 }
