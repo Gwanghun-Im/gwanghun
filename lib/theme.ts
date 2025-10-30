@@ -61,22 +61,34 @@ export const darkTheme = createTheme({
   palette: {
     mode: "dark",
     primary: {
-      main: "#3b82f6", // blue-500
-      light: "#60a5fa", // blue-400
-      dark: "#2563eb", // blue-600
+      main: "#61afef", // Atom One Dark blue
+      light: "#84c1ff",
+      dark: "#4d8cd6",
     },
     secondary: {
-      main: "#8b5cf6", // violet-500
-      light: "#a78bfa", // violet-400
-      dark: "#7c3aed", // violet-600
+      main: "#c678dd", // Atom One Dark purple
+      light: "#d89fea",
+      dark: "#a75ac7",
     },
     background: {
-      default: "#0f172a", // slate-900
-      paper: "#1e293b", // slate-800
+      default: "#282c34", // Atom One Dark main background
+      paper: "#21252b", // Atom One Dark darker background
     },
     text: {
-      primary: "#f1f5f9", // slate-100
-      secondary: "#94a3b8", // slate-400
+      primary: "#abb2bf", // Atom One Dark foreground
+      secondary: "#5c6370", // Atom One Dark comment gray
+    },
+    error: {
+      main: "#e06c75", // Atom One Dark red
+    },
+    warning: {
+      main: "#e5c07b", // Atom One Dark yellow
+    },
+    success: {
+      main: "#98c379", // Atom One Dark green
+    },
+    info: {
+      main: "#56b6c2", // Atom One Dark cyan
     },
   },
   typography: {
@@ -91,7 +103,7 @@ export const darkTheme = createTheme({
       styleOverrides: {
         root: {
           boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.3)",
-          backgroundColor: "#1e293b",
+          backgroundColor: "#21252b",
         },
       },
     },
@@ -100,7 +112,7 @@ export const darkTheme = createTheme({
         root: {
           borderRadius: 12,
           boxShadow: "0 1px 3px 0 rgb(0 0 0 / 0.3)",
-          backgroundColor: "#1e293b",
+          backgroundColor: "#21252b",
         },
       },
     },
@@ -110,6 +122,13 @@ export const darkTheme = createTheme({
           borderRadius: 8,
           textTransform: "none",
           fontWeight: 600,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          backgroundColor: "#21252b",
         },
       },
     },
