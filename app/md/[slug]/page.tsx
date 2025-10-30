@@ -22,7 +22,11 @@ export function generateStaticParams() {
   })) as { slug: string }[] // 강제 타입 지정
 }
 
-export default async function BlogPost({ params }) {
+interface BlogPostProps {
+  params: Promise<{ slug: string }>
+}
+
+export default async function BlogPost({ params }: BlogPostProps) {
   const { slug } = await params
   const filePath = path.join(process.cwd(), "markdown", `${slug}.md`) // 'markdown' 경로 설정
   const fileContent = fs.readFileSync(filePath, "utf-8")

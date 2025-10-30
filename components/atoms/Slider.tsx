@@ -16,7 +16,7 @@ export default function CustomSlider({
   step = 1,
   ...props
 }: CustomSliderProps) {
-  const formik = useFormikContext()
+  const formik = useFormikContext<any>()
 
   const valuetext = (value: number) => {
     return `${value} ${unit}`

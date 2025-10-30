@@ -1,8 +1,11 @@
 import { NextResponse } from "next/server"
 import dynamoDb from "@/lib/dynamodb"
+import type { GetMessagesResponse, ErrorResponse, ChatMessage } from "@/types/api"
 
 // 메시지 조회 API (GET)
-export async function GET(req) {
+export async function GET(
+  req: Request
+): Promise<NextResponse<GetMessagesResponse | ErrorResponse>> {
   try {
     const { searchParams } = new URL(req.url)
     const roomId = searchParams.get("roomId")
@@ -15,7 +18,7 @@ export async function GET(req) {
       )
     }
 
-    const params = {
+    const params: any = {
       TableName: "gwanghun_dynamo_db",
       KeyConditionExpression: "roomId = :roomId",
       ExpressionAttributeValues: {
@@ -23,7 +26,7 @@ export async function GET(req) {
       },
       ScanIndexForward: false, // 최신 메시지가 먼저 오도록 정렬 (DESC)
       Limit: 20, // 한 번에 불러올 메시지 개수
-      ExclusiveStartKey: null,
+      ExclusiveStartKey: undefined as any,
     }
 
     if (lastTimestamp) {
@@ -35,7 +38,10 @@ export async function GET(req) {
 
     const data = await dynamoDb.query(params).promise()
 
-    return NextResponse.json({ success: true, messages: data.Items.reverse() })
+    return NextResponse.json({
+      success: true,
+      data: ((data.Items || []) as ChatMessage[]).reverse(),
+    })
   } catch (error) {
     console.error("DynamoDB Error:", error)
     return NextResponse.json(
