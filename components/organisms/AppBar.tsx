@@ -4,6 +4,7 @@ import Link from "next/link"
 import LoginDialog from "./LoginDialog"
 import useUserStore from "@/store/useUserStore"
 import useLoginDialogStore from "@/store/useLoginDialogStore"
+import { ThemeToggle } from "@/components/atoms/ThemeToggle"
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -63,6 +64,9 @@ export default function AppBar() {
                 {item.name}
               </Link>
             ))}
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
             {userName ? (
               <div className="flex items-center ml-4">
                 <span className="mr-2">{userName}</span>
@@ -123,6 +127,9 @@ export default function AppBar() {
                 {item.name}
               </Link>
             ))}
+            <div className="py-2">
+              <ThemeToggle />
+            </div>
             {userName ? (
               <div className="pt-4">
                 <span className="block mb-2 text-white">{userName}</span>
