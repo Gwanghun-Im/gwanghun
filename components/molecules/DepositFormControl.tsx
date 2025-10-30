@@ -8,7 +8,7 @@ import {
 import { useFormikContext } from "formik"
 
 export const DepositFormControl = () => {
-  const formik = useFormikContext()
+  const formik = useFormikContext<any>()
   return (
     <FormControl>
       <FormLabel id="depositTypeControl">예금 방식</FormLabel>

@@ -9,7 +9,19 @@ import {
   TableBody,
 } from "@mui/material"
 
-export const SavingTable = ({ rows }) => (
+interface SavingRow {
+  title: string
+  b_interest: number
+  a_interest: number
+  total_money: number
+  sum_mon: number
+}
+
+interface SavingTableProps {
+  rows: SavingRow[]
+}
+
+export const SavingTable = ({ rows }: SavingTableProps) => (
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>
