@@ -1,7 +1,7 @@
 import type { NextConfig } from "next"
 
 const nextConfig: NextConfig = {
-  reactStrictMode: false, // 🔥 Strict Mode 비활성화
+  reactStrictMode: true,
 }
 
 export default nextConfig
