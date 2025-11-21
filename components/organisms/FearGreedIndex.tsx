@@ -46,15 +46,31 @@ export function FearGreedIndex() {
   }
 
   const fearGreedIndex = data.data[0].value_classification
+  const fearGreedValue = data.data[0].value
+
+  const getColorClass = (classification: string) => {
+    switch (classification) {
+      case "Extreme Fear":
+        return "bg-red-600"
+      case "Fear":
+        return "bg-orange-500"
+      case "Neutral":
+        return "bg-yellow-500"
+      case "Greed":
+        return "bg-lime-500"
+      case "Extreme Greed":
+        return "bg-green-500"
+      default:
+        return "bg-gray-500"
+    }
+  }
 
   return (
     <div
-      className={
-        "text-center text-2xl font-bold text-white text-opacity-50 flex items-center justify-center py-10 rounded-lg" +
-        (fearGreedIndex === "Fear" ? " bg-red-500" : " bg-green-500")
-      }
+      className={`text-center text-2xl font-bold text-white flex flex-col items-center justify-center py-10 rounded-lg ${getColorClass(fearGreedIndex)}`}
     >
-      Check today&apos;s greed and fear index: {fearGreedIndex}
+      <div className="text-3xl mb-2">{fearGreedValue}</div>
+      <div>Check today&apos;s greed and fear index: {fearGreedIndex}</div>
     </div>
   )
 }
