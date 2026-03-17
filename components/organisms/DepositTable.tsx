@@ -9,7 +9,19 @@ import {
   TableBody,
 } from "@mui/material"
 
-export const DepositTable = ({ rows }) => (
+interface DepositRow {
+  title: string
+  b_interest: number
+  a_interest: number
+  total_money: number
+  sum_mon: number
+}
+
+interface DepositTableProps {
+  rows: DepositRow[]
+}
+
+export const DepositTable = ({ rows }: DepositTableProps) => (
   <TableContainer component={Paper}>
     <Table sx={{ minWidth: 650 }} aria-label="simple table">
       <TableHead>

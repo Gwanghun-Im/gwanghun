@@ -21,7 +21,14 @@ export function useWebSocket() {
 
   useEffect(() => {
     // 🟢 WebSocket 연결 설정
-    const ws = new WebSocket(process.env.NEXT_PUBLIC_WEBSOCKET_URL)
+    const wsUrl = process.env.NEXT_PUBLIC_WEBSOCKET_URL
+
+    if (!wsUrl) {
+      console.warn("WebSocket URL is not configured")
+      return
+    }
+
+    const ws = new WebSocket(wsUrl)
 
     ws.onopen = () => printDev("✅ WebSocket Connected")
     ws.onmessage = (event) => {
@@ -44,7 +51,7 @@ export function useWebSocket() {
 
   // 🔥 최신 roomId를 참조하는 sendMessage
   const sendMessage = useCallback(() => {
-    if (socket && message.trim() && !isSending) {
+    if (socket && message.trim() && !isSending && userName) {
       setIsSending(true)
       printDev("🛜 Send Messages", { roomId })
 
@@ -63,7 +70,7 @@ export function useWebSocket() {
         setIsSending(false)
       }, 100)
     }
-  }, [socket, message, roomId, setMessage, isSending])
+  }, [socket, message, roomId, setMessage, isSending, userName])
 
   return { socket, sendMessage }
 }

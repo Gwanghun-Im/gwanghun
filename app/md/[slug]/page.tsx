@@ -13,7 +13,11 @@ export function generateStaticParams() {
     })) as { slug: string }[]
 }
 
-export default async function BlogPost({ params }) {
+interface BlogPostProps {
+  params: Promise<{ slug: string }>
+}
+
+export default async function BlogPost({ params }: BlogPostProps) {
   const { slug } = await params
   const filePath = path.join(
     process.cwd(),

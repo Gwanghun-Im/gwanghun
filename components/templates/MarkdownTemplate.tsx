@@ -39,17 +39,19 @@ const BlogList = ({ posts }: { posts: BlogType[] }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        gap: 5,
-        borderColor: "#191919",
-        border: 1,
-        padding: 3,
-        borderRadius: 5,
+        gap: 2,
       }}
     >
       {posts.length ? (
         posts.map((post) => <BlogCard key={post.title} blog={post} />)
       ) : (
-        <div className="text-center py-4 text-gray-500">게시물이 없습니다.</div>
+        <Typography
+          variant="body1"
+          color="text.secondary"
+          sx={{ textAlign: "center", py: 4 }}
+        >
+          게시물이 없습니다.
+        </Typography>
       )}
     </Box>
   )
@@ -76,13 +78,18 @@ export const MarkdownTemplate = () => {
   }, [])
 
   return (
-    <>
-      <Typography variant="h5" gutterBottom>
-        <Link href={"/md"}>Articles</Link>
+    <Box sx={{ mb: 6 }}>
+      <Typography variant="h4" gutterBottom fontWeight={700} sx={{ mb: 3 }}>
+        <Link
+          href={"/md"}
+          style={{ textDecoration: "none", color: "inherit" }}
+        >
+          📝 Articles
+        </Link>
       </Typography>
       <ErrorBoundary>
         {isLoading ? <LoadingSkeleton /> : <BlogList posts={posts} />}
       </ErrorBoundary>
-    </>
+    </Box>
   )
 }

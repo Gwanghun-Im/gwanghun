@@ -1,10 +1,14 @@
 import { NextResponse } from "next/server"
 import dynamoDb from "@/lib/dynamodb"
+import type { SendMessageRequest, SendMessageResponse, ErrorResponse } from "@/types/api"
 
 // 메시지 저장 API (POST)
-export async function POST(req) {
+export async function POST(
+  req: Request
+): Promise<NextResponse<SendMessageResponse | ErrorResponse>> {
   try {
-    const { roomId, sender, message } = await req.json()
+    const body = (await req.json()) as SendMessageRequest
+    const { roomId, sender, message } = body
 
     if (!roomId || !sender || !message) {
       return NextResponse.json(

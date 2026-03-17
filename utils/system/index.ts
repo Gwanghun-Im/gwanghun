@@ -61,5 +61,8 @@ export const getPublicEnv = () => {
  * @author 임광훈
  * @returns console.log
  */
-export const printDev =
-  process.env.NEXT_PUBLIC_ENV !== "production" && console.log
+export const printDev = (...args: any[]) => {
+  if (process.env.NEXT_PUBLIC_ENV !== "production") {
+    console.log(...args)
+  }
+}

@@ -1,8 +1,10 @@
 import { NextResponse } from "next/server"
-import { cookies } from "next/headers"
+import type { LoginResponse, ErrorResponse } from "@/types/api"
 
-// 메시지 조회 API (GET)
-export async function GET(req) {
+// 로그인 API (GET)
+export async function GET(
+  req: Request
+): Promise<NextResponse<LoginResponse | ErrorResponse>> {
   try {
     const { searchParams } = new URL(req.url)
     const name = searchParams.get("userName")
@@ -19,6 +21,7 @@ export async function GET(req) {
       userName: name,
     })
   } catch (error) {
+    console.error("Login error:", error)
     return NextResponse.json(
       { error: "처리 중 오류가 발생했습니다." },
       { status: 500 }

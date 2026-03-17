@@ -10,10 +10,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react"
 export default function ChatMessages() {
   const { messages, setMessages } = useChatMessageStore()
   const { userName } = useUserStore()
-  const [lastKey, setLastKey] = useState(null)
+  const [lastKey, setLastKey] = useState<string | null>(null)
   const { roomId } = useRoomStore()
   const { main } = useRouterChange()
-  const messageEndRef = useRef(null)
+  const messageEndRef = useRef<HTMLDivElement | null>(null)
 
   const fetchMessages = async () => {
     let url = `/api/chat/messages?roomId=${roomId}&limit=10`

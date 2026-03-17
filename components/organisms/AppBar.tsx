@@ -4,6 +4,8 @@ import Link from "next/link"
 import LoginDialog from "./LoginDialog"
 import useUserStore from "@/store/useUserStore"
 import useLoginDialogStore from "@/store/useLoginDialogStore"
+import { ThemeToggle } from "@/components/atoms/ThemeToggle"
+import { AutoStories } from "@mui/icons-material"
 
 const navItems = [
   { name: "Home", link: "/" },
@@ -47,8 +49,9 @@ export default function AppBar() {
 
           {/* 로고 */}
           <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="text-xl font-bold">
-              gwanghun.im
+            <Link href="/" className="flex items-center gap-2 text-xl font-bold hover:opacity-80 transition-opacity">
+              <AutoStories sx={{ fontSize: 28 }} />
+              <span>gwanghun.im</span>
             </Link>
           </div>
 
@@ -63,6 +66,9 @@ export default function AppBar() {
                 {item.name}
               </Link>
             ))}
+            <div className="ml-2">
+              <ThemeToggle />
+            </div>
             {userName ? (
               <div className="flex items-center ml-4">
                 <span className="mr-2">{userName}</span>
@@ -104,7 +110,10 @@ export default function AppBar() {
         {/* 메뉴 내용 */}
         <div className="p-4">
           <div className="flex justify-between items-center mb-6">
-            <span className="text-xl font-bold">Menu</span>
+            <Link href="/" className="flex items-center gap-2 text-xl font-bold" onClick={() => setMobileOpen(false)}>
+              <AutoStories sx={{ fontSize: 28 }} />
+              <span>gwanghun.im</span>
+            </Link>
             <button
               onClick={() => setMobileOpen(false)}
               className="text-white p-2"
@@ -123,6 +132,9 @@ export default function AppBar() {
                 {item.name}
               </Link>
             ))}
+            <div className="py-2">
+              <ThemeToggle />
+            </div>
             {userName ? (
               <div className="pt-4">
                 <span className="block mb-2 text-white">{userName}</span>

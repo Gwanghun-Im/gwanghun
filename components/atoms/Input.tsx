@@ -15,16 +15,18 @@ export const Input = ({
   type = "text",
   ...props
 }: InputProps) => {
-  const formik = useFormikContext()
+  const formik = useFormikContext<any>()
   return (
     <TextField
       label={label}
       name={name}
-      value={formik.values[name]}
+      value={name ? formik.values[name] : ""}
       onChange={formik.handleChange}
       onBlur={formik.handleBlur}
-      helperText={formik.touched[name] && formik.errors[name]}
-      error={formik.touched[name] && !!formik.errors[name]}
+      helperText={
+        name ? (formik.touched[name] && formik.errors[name]) as string : undefined
+      }
+      error={name ? formik.touched[name] && !!formik.errors[name] : false}
       size="small"
       autoComplete="off"
       type={type}

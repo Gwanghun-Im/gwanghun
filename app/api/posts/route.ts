@@ -1,17 +1,15 @@
 import { NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
-import { gzipSync } from "zlib"
+import type { BlogPost, ErrorResponse } from "@/types/api"
 
-export async function GET() {
+export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
   try {
     const postsDirectory = path.join(process.cwd(), "markdown")
     const fileNames = fs.readdirSync(postsDirectory)
 
-    const posts = fileNames
-      .filter(
-        (fileName) => !fileName.includes("how") && fileName.includes(".md")
-      )
+    const posts: BlogPost[] = fileNames
+      .filter((fileName) => !fileName.includes("how"))
       .map((fileName) => {
         return {
           title: fileName.replace(/\.md$/, ""),

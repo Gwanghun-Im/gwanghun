@@ -1,33 +1,76 @@
 "use client"
-import Link from "next/link"
-import { use } from "react"
+import { useEffect, useState } from "react"
 
-const getFearGreedIndex = fetch("https://api.alternative.me/fng/")
-  .then((response) => response.json())
-  .catch((error) => {
-    console.error("Error:", error)
-  })
+interface FearGreedData {
+  data: Array<{
+    value: string
+    value_classification: string
+    timestamp: string
+    time_until_update: string
+  }>
+}
 
 export function FearGreedIndex() {
-  const data = use(getFearGreedIndex)
+  const [data, setData] = useState<FearGreedData | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    fetch("https://api.alternative.me/fng/")
+      .then((response) => response.json())
+      .then((result: FearGreedData) => {
+        setData(result)
+        setIsLoading(false)
+      })
+      .catch((err) => {
+        console.error("Error:", err)
+        setError("Failed to load data")
+        setIsLoading(false)
+      })
+  }, [])
+
+  if (isLoading) {
+    return (
+      <div className="text-center text-2xl font-bold text-opacity-50 flex items-center justify-center py-10">
+        Loading...
+      </div>
+    )
+  }
+
+  if (error || !data) {
+    return (
+      <div className="text-center text-2xl font-bold text-opacity-50 flex items-center justify-center py-10">
+        Error loading data
+      </div>
+    )
+  }
+
   const fearGreedIndex = data.data[0].value_classification
+  const fearGreedValue = data.data[0].value
+
+  const getColorClass = (classification: string) => {
+    switch (classification) {
+      case "Extreme Fear":
+        return "bg-red-600"
+      case "Fear":
+        return "bg-orange-500"
+      case "Neutral":
+        return "bg-yellow-500"
+      case "Greed":
+        return "bg-lime-500"
+      case "Extreme Greed":
+        return "bg-green-500"
+      default:
+        return "bg-gray-500"
+    }
+  }
+
   return (
     <div
-      className={
-        "text-center text-2xl font-bold text-white text-opacity-50 flex items-center justify-center" +
-        (fearGreedIndex === "Fear" ? " bg-red-500" : " bg-green-500")
-      }
+      className={`text-center text-2xl font-bold text-white flex flex-col items-center justify-center py-10 rounded-lg ${getColorClass(fearGreedIndex)}`}
     >
-      <span className="hidden md:inline">
-        Check today&apos;s greed and fear index:{" "}
-      </span>
-      <span className="md:hidden">today&apos;s gnf index: </span>
-      <Link
-        href="https://edition.cnn.com/markets/fear-and-greed"
-        className="text-white text-opacity-50"
-      >
-        {fearGreedIndex}
-      </Link>
+      <div className="text-3xl mb-2">{fearGreedValue}</div>
+      <div>Check today&apos;s greed and fear index: {fearGreedIndex}</div>
     </div>
   )
 }
