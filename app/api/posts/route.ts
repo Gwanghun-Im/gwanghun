@@ -17,7 +17,16 @@ export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
         }
       })
 
-    return NextResponse.json(posts)
+    const json = JSON.stringify(posts)
+    const gzipped = gzipSync(json)
+
+    return new Response(gzipped, {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Content-Encoding": "gzip",
+      },
+    })
   } catch (error) {
     console.error("파일 읽기 오류:", error)
     return NextResponse.json(

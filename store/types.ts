@@ -4,7 +4,9 @@ export type ChatMessageType = {
   message: string
   setMessage: (data: string) => void
   messages: MessageResponse[]
-  setMessages: (data: MessageResponse[]) => void
+  setMessages: (
+    data: MessageResponse[] | ((prev: MessageResponse[]) => MessageResponse[])
+  ) => void
 }
 
 export type RoomType<T> = {
