@@ -34,7 +34,7 @@ export default function ChatFields() {
         onChange={(e) => setMessage(e.target.value)}
         onCompositionStart={() => setIsComposing(true)}
         onCompositionEnd={() => setIsComposing(false)}
-        onKeyDown={(e) => {
+        onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>) => {
           if (!isComposing && e.key === "Enter" && !e.shiftKey) {
             e.preventDefault()
             sendMessage()
