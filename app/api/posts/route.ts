@@ -1,9 +1,10 @@
 import { NextResponse } from "next/server"
 import fs from "fs"
+import { gzipSync } from "zlib"
 import path from "path"
 import type { BlogPost, ErrorResponse } from "@/types/api"
 
-export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
+export async function GET(): Promise<Response | NextResponse<ErrorResponse>> {
   try {
     const postsDirectory = path.join(process.cwd(), "markdown")
     const fileNames = fs.readdirSync(postsDirectory)
@@ -20,7 +21,7 @@ export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
     const json = JSON.stringify(posts)
     const gzipped = gzipSync(json)
 
-    return new Response(gzipped, {
+    return new Response(new Uint8Array(gzipped), {
       status: 200,
       headers: {
         "Content-Type": "application/json",
