@@ -1,25 +1,25 @@
+"use client"
+
+import { Box, Typography } from "@mui/material"
+import Link from "next/link"
 import { Suspense } from "react"
 import { ErrorBoundary } from "@/components/atoms/ErrorBoundary"
 import { FearGreedIndex } from "@/components/organisms/FearGreedIndex"
+import { Skeleton } from "@mui/material"
 
 export const GreedFearIndexTemplate = () => {
   return (
-    <ErrorBoundary
-      fallback={
-        <div className="text-center text-2xl font-bold text-opacity-50 flex items-center justify-center">
-          Error loading data
-        </div>
-      }
-    >
-      <Suspense
-        fallback={
-          <div className="text-center text-2xl font-bold text-opacity-50 flex items-center justify-center">
-            Loading...
-          </div>
-        }
-      >
-        <FearGreedIndex />
-      </Suspense>
-    </ErrorBoundary>
+    <Box sx={{ mb: 6 }}>
+      <Typography variant="h4" gutterBottom fontWeight={700} sx={{ mb: 3 }}>
+        <Link href="/stock" style={{ textDecoration: "none", color: "inherit" }}>
+          📊 Fear & Greed Index
+        </Link>
+      </Typography>
+      <ErrorBoundary>
+        <Suspense fallback={<Skeleton variant="rounded" height={120} sx={{ borderRadius: 2 }} />}>
+          <FearGreedIndex />
+        </Suspense>
+      </ErrorBoundary>
+    </Box>
   )
 }

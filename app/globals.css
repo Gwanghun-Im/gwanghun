@@ -99,7 +99,7 @@ iframe {
 
 .mark-down {
   font-size: 1.125rem;
-  color: #ececec;
+  color: #1a1a1a;
   transition: color 0.125s ease-in;
   line-height: 1.7;
   letter-spacing: -0.004em;
@@ -497,6 +497,10 @@ iframe {
   .katex-mathml {
     display: none;
   }
+}
+
+html.dark .mark-down {
+  color: #ececec;
 }
 
 /*  */

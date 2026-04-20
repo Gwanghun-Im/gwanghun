@@ -11,7 +11,7 @@ const useChatMessageStore = create<ChatMessageType>((set) => ({
       messages:
         typeof data === "function"
           ? data(state.messages) // 함수형 업데이트
-          : data, // 직접 값 할당
+          : data ?? [], // 직접 값 할당
     })),
 }))
 

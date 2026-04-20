@@ -1,5 +1,6 @@
 import fs from "fs"
 import path from "path"
+import matter from "gray-matter"
 import MarkdownContent from "@/components/molecules/MarkdownContent"
 
 export function generateStaticParams() {
@@ -7,7 +8,7 @@ export function generateStaticParams() {
   const filenames = fs.readdirSync(contentDir)
 
   return filenames
-    .filter((filenames) => filenames.includes(".md"))
+    .filter((filename) => filename.endsWith(".md"))
     .map((filename) => ({
       slug: filename.replace(/\.md$/, ""),
     })) as { slug: string }[]
@@ -24,7 +25,8 @@ export default async function BlogPost({ params }: BlogPostProps) {
     "markdown",
     `${decodeURIComponent(slug)}.md`
   )
-  const content = fs.readFileSync(filePath, "utf-8")
+  const raw = fs.readFileSync(filePath, "utf-8")
+  const { content } = matter(raw)
 
   return <MarkdownContent content={content} />
 }

@@ -1,4 +1,5 @@
 "use client"
+
 import dayjs from "dayjs"
 import ChatRoom from "../organisms/ChatRoom"
 import { Box, Typography } from "@mui/material"
@@ -12,16 +13,17 @@ const ChatRoomTemplate = () => {
 
   useEffect(() => {
     setRoomId(day)
-  }, [setRoomId, day]) // ✅ 의존성 배열 추가
+  }, [setRoomId, day])
 
   return (
-    <>
-      <Typography variant="h5" gutterBottom>
-        <Link href={"/chat"}>방명록(WebSocket)</Link>
+    <Box sx={{ mb: 6 }}>
+      <Typography variant="h4" gutterBottom fontWeight={700} sx={{ mb: 3 }}>
+        <Link href="/chat" style={{ textDecoration: "none", color: "inherit" }}>
+          💬 방명록
+        </Link>
       </Typography>
-      <Box sx={{ margin: 5 }}></Box>
       <ChatRoom />
-    </>
+    </Box>
   )
 }
 

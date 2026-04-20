@@ -1,16 +1,16 @@
-import { Card, CardContent, Typography, Box, Chip } from "@mui/material"
+"use client"
+
+import { Card, CardContent, Typography, Box } from "@mui/material"
 import { useRouter } from "next/navigation"
 import { BlogType } from "../templates/MarkdownTemplate"
 import { ArrowForward } from "@mui/icons-material"
 
-const BlogCard = (blog: { blog: BlogType }) => {
+const BlogCard = ({ blog }: { blog: BlogType }) => {
   const router = useRouter()
 
   return (
     <Card
-      onClick={() => {
-        router.push("/md/" + blog.blog.link)
-      }}
+      onClick={() => router.push("/md/" + blog.link)}
       sx={{
         cursor: "pointer",
         transition: "all 0.3s ease",
@@ -24,22 +24,12 @@ const BlogCard = (blog: { blog: BlogType }) => {
       }}
     >
       <CardContent>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
+        <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <Box sx={{ flex: 1 }}>
             <Typography variant="h6" component="h2" fontWeight={600}>
-              {blog.blog.title}
+              {blog.title}
             </Typography>
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              sx={{ mt: 1 }}
-            >
+            <Typography variant="body2" color="text.secondary" sx={{ mt: 0.5 }}>
               자세히 보기
             </Typography>
           </Box>

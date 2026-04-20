@@ -1,33 +1,23 @@
 import { NextResponse } from "next/server"
 import fs from "fs"
-import { gzipSync } from "zlib"
 import path from "path"
 import type { BlogPost, ErrorResponse } from "@/types/api"
 
-export async function GET(): Promise<Response | NextResponse<ErrorResponse>> {
+export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
   try {
     const postsDirectory = path.join(process.cwd(), "markdown")
     const fileNames = fs.readdirSync(postsDirectory)
 
+    const HIDDEN = ["how", "economies_700", "intro"]
+
     const posts: BlogPost[] = fileNames
-      .filter((fileName) => !fileName.includes("how"))
-      .map((fileName) => {
-        return {
-          title: fileName.replace(/\.md$/, ""),
-          link: fileName.replace(/\.md$/, "").toLowerCase(),
-        }
-      })
+      .filter((fileName) => fileName.endsWith(".md") && !HIDDEN.some((h) => fileName.includes(h)))
+      .map((fileName) => ({
+        title: fileName.replace(/\.md$/, ""),
+        link: fileName.replace(/\.md$/, ""),
+      }))
 
-    const json = JSON.stringify(posts)
-    const gzipped = gzipSync(json)
-
-    return new Response(new Uint8Array(gzipped), {
-      status: 200,
-      headers: {
-        "Content-Type": "application/json",
-        "Content-Encoding": "gzip",
-      },
-    })
+    return NextResponse.json(posts)
   } catch (error) {
     console.error("파일 읽기 오류:", error)
     return NextResponse.json(

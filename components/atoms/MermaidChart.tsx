@@ -38,9 +38,9 @@ export default function MermaidChart({ chart }: { chart: string }) {
       <Box
         sx={{
           p: 2,
-          bgcolor: "#2a1a1a",
+          bgcolor: "error.light",
           borderRadius: 1,
-          color: "#ff6b6b",
+          color: "error.contrastText",
           fontSize: "0.85rem",
           fontFamily: "monospace",
         }}
@@ -58,7 +58,7 @@ export default function MermaidChart({ chart }: { chart: string }) {
         justifyContent: "center",
         my: 2,
         p: 2,
-        bgcolor: "#1e1e1e",
+        bgcolor: "background.paper",
         borderRadius: 2,
         overflowX: "auto",
       }}
