@@ -1,20 +1,28 @@
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import fs from "fs"
 import path from "path"
 import type { BlogPost, ErrorResponse } from "@/types/api"
 
-export async function GET(): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
+export async function GET(request: NextRequest): Promise<NextResponse<BlogPost[] | ErrorResponse>> {
   try {
-    const postsDirectory = path.join(process.cwd(), "markdown")
+    const dir = request.nextUrl.searchParams.get("dir")
+    const subDir = dir === "private" ? "private" : ""
+    const postsDirectory = path.join(process.cwd(), "markdown", subDir)
+
+    if (!fs.existsSync(postsDirectory)) {
+      return NextResponse.json([])
+    }
+
     const fileNames = fs.readdirSync(postsDirectory)
 
-    const HIDDEN = ["how", "economies_700", "intro"]
+    const HIDDEN = subDir ? [] : ["how", "economies_700", "intro"]
+    const ext = subDir === "private" ? ".html" : ".md"
 
     const posts: BlogPost[] = fileNames
-      .filter((fileName) => fileName.endsWith(".md") && !HIDDEN.some((h) => fileName.includes(h)))
+      .filter((fileName) => fileName.endsWith(ext) && !HIDDEN.some((h) => fileName.includes(h)))
       .map((fileName) => ({
-        title: fileName.replace(/\.md$/, ""),
-        link: fileName.replace(/\.md$/, ""),
+        title: fileName.replace(new RegExp(`\\${ext}$`), ""),
+        link: fileName.replace(new RegExp(`\\${ext}$`), ""),
       }))
 
     return NextResponse.json(posts)
