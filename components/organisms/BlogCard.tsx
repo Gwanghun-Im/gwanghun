@@ -5,12 +5,12 @@ import { useRouter } from "next/navigation"
 import { BlogType } from "../templates/MarkdownTemplate"
 import { ArrowForward } from "@mui/icons-material"
 
-const BlogCard = ({ blog }: { blog: BlogType }) => {
+const BlogCard = ({ blog, basePath = "/md" }: { blog: BlogType; basePath?: string }) => {
   const router = useRouter()
 
   return (
     <Card
-      onClick={() => router.push("/md/" + blog.link)}
+      onClick={() => router.push(basePath + "/" + blog.link)}
       sx={{
         cursor: "pointer",
         transition: "all 0.3s ease",

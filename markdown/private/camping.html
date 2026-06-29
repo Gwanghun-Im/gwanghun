@@ -1,0 +1,238 @@
+<style>
+  .camp-wrap { display: flex; flex-direction: column; gap: 16px; }
+  .camp-card {
+    border: 1px solid rgba(128,128,128,0.3);
+    border-radius: 12px;
+    padding: 16px;
+    background: rgba(128,128,128,0.06);
+  }
+  .camp-header {
+    margin: 0 0 12px 0;
+  }
+  .camp-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+  }
+  .camp-links {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .camp-link {
+    font-size: 0.78rem;
+    padding: 2px 10px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .camp-link--reserve {
+    background: #1565c0;
+    color: #fff;
+  }
+  .dark .camp-link--reserve {
+    background: #1e88e5;
+  }
+  .camp-link--search {
+    background: #2db400;
+    color: #fff;
+  }
+  .camp-link--blog {
+    background: #757575;
+    color: #fff;
+  }
+  .dark .camp-link--blog {
+    background: #616161;
+  }
+  .camp-info {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 6px 12px;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+  }
+  .camp-info dt { opacity: 0.55; font-weight: 500; }
+  .camp-info dd { margin: 0; }
+  .camp-total {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #2e7d32;
+    margin-bottom: 10px;
+  }
+  .dark .camp-total { color: #66bb6a; }
+  .camp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .camp-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: rgba(21,101,192,0.1);
+    color: #1565c0;
+  }
+  .dark .camp-tag {
+    background: rgba(144,202,249,0.15);
+    color: #90caf9;
+  }
+  .camp-subtitle { opacity: 0.5; font-size: 0.85rem; margin-bottom: 20px; }
+</style>
+
+<h1 style="font-size:1.5rem; font-weight:700; margin-bottom:4px;">⛺ 캠핑장 비교</h1>
+<p class="camp-subtitle">7월 15일(화) ~ 16일(수) · 상동역 기준 · 입실 15:00 ~ 퇴실 11:00</p>
+
+<div class="camp-wrap">
+
+  <!-- 리틀포레스트캠핑 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🌲 리틀포레스트캠핑</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/5VmQSfaA" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%EB%A6%AC%ED%8B%80%ED%8F%AC%EB%A0%88%EC%8A%A4%ED%8A%B8%EC%BA%A0%ED%95%91" target="_blank" rel="noopener">네이버</a>
+        <a class="camp-link camp-link--blog" href="https://blog.naver.com/dusmldl/224261253539" target="_blank" rel="noopener">후기</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>248,000원</dd>
+      <dt>바베큐</dt><dd>무료</dd>
+      <dt>위치</dt><dd>가평군 91km (1시간 21분)</dd>
+      <dt>통행료</dt><dd>4,100원</dd>
+      <dt>연료비</dt><dd>17,000원</dd>
+    </div>
+    <div class="camp-total">총 예상: 269,100원</div>
+    <div class="camp-tags">
+      <span class="camp-tag">캠핑카</span>
+      <span class="camp-tag">턴테이블</span>
+      <span class="camp-tag">빔프로젝터</span>
+      <span class="camp-tag">개별욕실</span>
+      <span class="camp-tag">공용샤워실</span>
+      <span class="camp-tag">조식무료</span>
+      <span class="camp-tag">산</span>
+    </div>
+  </div>
+
+  <!-- 아웃오브파크 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🏕️ 아웃오브파크</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/F884bQQi" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%EC%95%84%EC%9B%83%EC%98%A4%EB%B8%8C%ED%8C%8C%ED%81%AC" target="_blank" rel="noopener">네이버</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>175,000원</dd>
+      <dt>바베큐</dt><dd>25,000원</dd>
+      <dt>위치</dt><dd>가평군 91km (1시간 49분)</dd>
+      <dt>통행료</dt><dd>6,300원</dd>
+      <dt>연료비</dt><dd>19,000원</dd>
+    </div>
+    <div class="camp-total">총 예상: 225,300원</div>
+    <div class="camp-tags">
+      <span class="camp-tag">카라반</span>
+      <span class="camp-tag">개별욕실</span>
+      <span class="camp-tag">호수</span>
+    </div>
+  </div>
+
+  <!-- 올덴카라반 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🚐 올덴카라반</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/xTT6xal8" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%EC%98%AC%EB%8D%B4%EC%B9%B4%EB%9D%BC%EB%B0%98" target="_blank" rel="noopener">네이버</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>159,000원</dd>
+      <dt>바베큐</dt><dd>25,000원</dd>
+      <dt>위치</dt><dd>가평군 91km (1시간 49분)</dd>
+      <dt>통행료</dt><dd>6,300원</dd>
+      <dt>연료비</dt><dd>19,000원</dd>
+    </div>
+    <div class="camp-total">총 예상: 209,300원 ⭐ 최저가</div>
+    <div class="camp-tags">
+      <span class="camp-tag">카라반</span>
+      <span class="camp-tag">사우나</span>
+      <span class="camp-tag">고기현장구매필수</span>
+      <span class="camp-tag">특가</span>
+      <span class="camp-tag">호수</span>
+    </div>
+  </div>
+
+  <!-- 달빛정원글램핑 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🌙 달빛정원글램핑</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/5D8t2PFd" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%EB%8B%AC%EB%B9%9B%EC%A0%95%EC%9B%90%EA%B8%80%EB%9E%A8%ED%95%91" target="_blank" rel="noopener">네이버</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>198,000원</dd>
+      <dt>바베큐</dt><dd>25,000원</dd>
+      <dt>위치</dt><dd>가평군 91km (1시간 32분)</dd>
+      <dt>통행료</dt><dd>5,700원</dd>
+      <dt>연료비</dt><dd>15,000원</dd>
+    </div>
+    <div class="camp-total">총 예상: 243,700원</div>
+    <div class="camp-tags">
+      <span class="camp-tag">글램핑</span>
+      <span class="camp-tag">특가</span>
+      <span class="camp-tag">근처휴양림</span>
+    </div>
+  </div>
+
+  <!-- 리즈밸리글램핑펜션 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🏔️ 리즈밸리글램핑펜션</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/G4WCvFcL" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%EB%A6%AC%EC%A6%88%EB%B0%B8%EB%A6%AC%EA%B8%80%EB%9E%A8%ED%95%91%ED%8E%9C%EC%85%98" target="_blank" rel="noopener">네이버</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>180,000원</dd>
+      <dt>바베큐</dt><dd>20,000원</dd>
+      <dt>위치</dt><dd>가평군 92km (1시간 33분)</dd>
+      <dt>통행료</dt><dd>5,700원</dd>
+      <dt>연료비</dt><dd>16,000원</dd>
+    </div>
+    <div class="camp-total">총 예상: 221,700원</div>
+    <div class="camp-tags">
+      <span class="camp-tag">카라반</span>
+      <span class="camp-tag">공용샤워시설</span>
+      <span class="camp-tag">계곡</span>
+      <span class="camp-tag">5%할인</span>
+    </div>
+  </div>
+
+  <!-- 해와달수상낚시빌리지 -->
+  <div class="camp-card">
+    <div class="camp-header">
+      <div class="camp-title">🎣 해와달수상낚시빌리지</div>
+      <div class="camp-links">
+        <a class="camp-link camp-link--reserve" href="https://naver.me/GtURueqV" target="_blank" rel="noopener">예약</a>
+        <a class="camp-link camp-link--search" href="https://search.naver.com/search.naver?query=%ED%95%B4%EC%99%80%EB%8B%AC%EC%88%98%EC%83%81%EB%82%9A%EC%8B%9C%EB%B9%8C%EB%A6%AC%EC%A7%80" target="_blank" rel="noopener">네이버</a>
+      </div>
+    </div>
+    <div class="camp-info">
+      <dt>숙박</dt><dd>180,000원</dd>
+      <dt>바베큐</dt><dd>20,000원</dd>
+      <dt>위치</dt><dd>포천시 113km (1시간 36분)</dd>
+      <dt>통행료</dt><dd>5,000원</dd>
+      <dt>연료비</dt><dd>19,500원</dd>
+    </div>
+    <div class="camp-total">총 예상: 224,500원</div>
+    <div class="camp-tags">
+      <span class="camp-tag">글램핑</span>
+      <span class="camp-tag">개별욕실</span>
+      <span class="camp-tag">낚시</span>
+      <span class="camp-tag">바베큐2만원</span>
+      <span class="camp-tag">앞에호수</span>
+    </div>
+  </div>
+
+</div>
