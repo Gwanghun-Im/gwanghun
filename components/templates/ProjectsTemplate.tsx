@@ -31,7 +31,7 @@ const MAIN_PROJECTS: Project[] = [
       { metric: "Prompt Caching", description: "API 비용 절감" },
       { metric: "HITL", description: "Human-in-the-Loop" },
     ],
-    articleLink: "/md/lesson-learned",
+    articleLink: "/lessons/robo-advisor",
     badge: "AI",
   },
   {
